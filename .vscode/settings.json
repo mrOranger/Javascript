@@ -8,6 +8,8 @@
       "editor.codeLens": true,
       "editor.formatOnSave": true,
       "editor.defaultFormatter": "esbenp.prettier-vscode",
+      "jsdoc.Author": "Edoardo Oranger (mrOranger)",
+      "jsdoc.EnabledDate": true,
       "workbench.colorTheme": "Sublime Material Theme - Dark",
       "workbench.iconTheme": "material-icon-theme",
       "workbench.productIconTheme": "Default",

@@ -1,0 +1,63 @@
+body {
+      font-family: 'Ubuntu', sans-serif;
+      background-color: #ffc857;
+}
+
+.w-full {
+      width: 100%;
+}
+
+.centered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.column {
+      flex-direction: column;
+}
+
+.row {
+      flex-direction: row;
+}
+
+.p-10 {
+      padding: 10px;
+}
+
+.h-25 {
+      height: 25%;
+}
+
+.primary {
+      width: 25%;
+      height: 100%;
+      margin: 10px;
+      color: white;
+      border-color: transparent;
+      border-radius: 25px;
+      font-size: x-large;
+      cursor: pointer;
+      transition: 0.5s;
+      transition-duration: 0.5;
+}
+
+.primary:hover {
+      transform: scale(1.1);
+      transition: 0.5s;
+      transition-duration: 0.5;
+      transition-timing-function: ease;
+}
+
+.decrease {
+      background-color: #c5283d;
+}
+
+.increase {
+      background-color: #255f85;
+}
+
+.disabled {
+      background-color: gray;
+      cursor: not-allowed;
+}
