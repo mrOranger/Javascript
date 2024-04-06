@@ -1,0 +1,83 @@
+body {
+      font-family: 'Ubuntu', sans-serif;
+      background-color: #fce4d8;
+}
+
+.w-full {
+      width: 100%;
+}
+
+.centered {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+}
+
+.column {
+      flex-direction: column;
+}
+
+.row {
+      flex-direction: row;
+}
+
+.p-10 {
+      padding: 10px;
+}
+
+.h-25 {
+      height: 25%;
+}
+
+.primary {
+      width: 10%;
+      height: 100%;
+      margin: 0px 0px 0px 0px;
+      color: white;
+      border-color: transparent;
+      border-radius: 0px 25px 25px 0px;
+      font-size: x-large;
+      cursor: pointer;
+      transition: 1s;
+      transition-duration: 0.5;
+}
+
+.primary:hover {
+      background-color: #b5f8fe;
+      transition: 1s;
+      transition-duration: 0.5;
+      transition-timing-function: ease;
+}
+
+.todo {
+      background-color: #f75590;
+}
+
+.disabled {
+      background-color: #b5f8fe;
+      cursor: not-allowed;
+}
+
+.input {
+      width: 50%;
+      height: 25%;
+      border-radius: 10px;
+      border: none;
+      padding: 10px;
+      transition-duration: 1s;
+}
+
+.input-text {
+      font-size: x-large;
+      color: #f75590;
+}
+
+.input:hover {
+      transform: scale(1.1);
+      transition-duration: 0.5s;
+}
+
+#todo-list {
+      padding: 20px;
+      font-size: x-large;
+}
