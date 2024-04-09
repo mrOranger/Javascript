@@ -29,7 +29,7 @@ therefore, JavaScript has a own type to manage functions that is the _Function_ 
 As mentioned above, functions are first class' citizen, therefore, they can be assigned to variables, in fact, we could define a function in two different ways:
 
 ```javascript
-const aFunction = function aFunction() {
+const aFunction = function () {
       console.log('aFunction');
 };
 
