@@ -4,6 +4,7 @@
       "editor.cursorBlinking": "expand",
       "editor.cursorStyle": "block-outline",
       "editor.cursorSmoothCaretAnimation": "on",
+      "editor.fontLigatures": true,
       "editor.codeLens": true,
       "editor.formatOnSave": true,
       "editor.defaultFormatter": "esbenp.prettier-vscode",
