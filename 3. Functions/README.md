@@ -47,7 +47,7 @@ the result is the same, so what is the difference between these two declarations
 aFunction(); // Undefined function 'afunction'
 anotherFunction(); // anotherFunction
 
-const aFunction = function aFunction() {
+const aFunction = function () {
       console.log('aFunction');
 };
 
