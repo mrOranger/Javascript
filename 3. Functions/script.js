@@ -8,7 +8,11 @@ const resultText = document.getElementById('result');
 const PAPER_CHOICE = 'paper';
 const ROCK_CHOICE = 'rock';
 const SCISSORS_CHOICE = 'scissors';
-const RESULT = [PAPER_CHOICE, ROCK_CHOICE, SCISSORS_CHOICE];
+const CHOICES = [PAPER_CHOICE, ROCK_CHOICE, SCISSORS_CHOICE];
+
+const VICTORY = 'won!';
+const DEFEAT = 'lost!';
+const DRAW = 'Draw!';
 
 let countDownValue = 3;
 let currentChoice = null;
@@ -16,67 +20,49 @@ let finalChoice = null;
 let gameStarting = false;
 
 paperIcon.addEventListener('mouseover', function onPaperIconHover() {
-      if (!gameStarting) {
-            if (currentChoice != PAPER_CHOICE && !finalChoice) {
-                  choice.innerText = `Choose your weapon ... ${PAPER_CHOICE}!`;
-                  currentChoice = PAPER_CHOICE;
-            }
-      }
+      onIconHover(PAPER_CHOICE);
 });
 
 rockIcon.addEventListener('mouseover', function onRockIconHover() {
-      if (!gameStarting) {
-            if (currentChoice != ROCK_CHOICE && !finalChoice) {
-                  choice.innerText = `Choose your weapon ... ${ROCK_CHOICE}!`;
-                  currentChoice = ROCK_CHOICE;
-            }
-      }
+      onIconHover(ROCK_CHOICE);
 });
 
 scissorsIcon.addEventListener('mouseover', function onScissorsIconHover() {
-      if (!gameStarting) {
-            if (currentChoice != SCISSORS_CHOICE && !finalChoice) {
-                  choice.innerText = `Choose your weapon ... ${SCISSORS_CHOICE}!`;
-                  currentChoice = SCISSORS_CHOICE;
-            }
-      }
+      onIconHover(SCISSORS_CHOICE);
 });
 
-paperIcon.addEventListener('click', function onPaperIconHover() {
+function onIconHover(iconChoice) {
+      if (!gameStarting) {
+            if (currentChoice != iconChoice && !finalChoice) {
+                  choice.innerText = `Choose your weapon ... ${iconChoice}!`;
+                  currentChoice = iconChoice;
+            }
+      }
+}
+
+paperIcon.addEventListener('click', function onPaperIconClick() {
+      onIconClick(PAPER_CHOICE);
+});
+
+rockIcon.addEventListener('click', function onRockIconClick() {
+      onIconClick(ROCK_CHOICE);
+});
+
+scissorsIcon.addEventListener('click', function onScissorsIconClick() {
+      onIconClick(SCISSORS_CHOICE);
+});
+
+function onIconClick(playerChoice) {
       if (!gameStarting) {
             if (playButton.classList.contains('disabled')) {
                   playButton.classList.remove('disabled');
             }
-            if (finalChoice != PAPER_CHOICE) {
-                  choice.innerText = `Choose your weapon ... ${PAPER_CHOICE}!`;
-                  finalChoice = PAPER_CHOICE;
+            if (finalChoice != playerChoice) {
+                  choice.innerText = `Choose your weapon ... ${playerChoice}!`;
+                  finalChoice = playerChoice;
             }
       }
-});
-
-rockIcon.addEventListener('click', function onRockIconHover() {
-      if (!gameStarting) {
-            if (playButton.classList.contains('disabled')) {
-                  playButton.classList.remove('disabled');
-            }
-            if (finalChoice != ROCK_CHOICE) {
-                  choice.innerText = `Choose your weapon ... ${ROCK_CHOICE}!`;
-                  finalChoice = ROCK_CHOICE;
-            }
-      }
-});
-
-scissorsIcon.addEventListener('click', function onScissorsIconHover() {
-      if (!gameStarting) {
-            if (playButton.classList.contains('disabled')) {
-                  playButton.classList.remove('disabled');
-            }
-            if (finalChoice != SCISSORS_CHOICE) {
-                  choice.innerText = `Choose your weapon ... ${SCISSORS_CHOICE}!`;
-                  finalChoice = SCISSORS_CHOICE;
-            }
-      }
-});
+}
 
 playButton.addEventListener('click', function onPlayButtonClick() {
       if (!gameStarting) {
@@ -98,33 +84,38 @@ function startCountdown() {
             }, 1000);
       } else {
             const result = getResult();
-            countDownValue = 3;
-            playButton.classList.add('disabled');
-            if (result !== 'Draw!') {
+            if (result !== DRAW) {
                   resultText.innerText = `You ... ${result}`;
             } else {
                   resultText.innerText = `${result}`;
             }
-            currentChoice = null;
-            finalChoice = null;
-            gameStarting = false;
+            resetGame();
       }
 }
 
 function getResult() {
       const randomValue = Math.round(Math.random() * 2);
-      const computerValue = RESULT[randomValue];
+      const computerValue = CHOICES[randomValue];
+
       if (
             (computerValue === ROCK_CHOICE && finalChoice === PAPER_CHOICE) ||
             (computerValue === PAPER_CHOICE && finalChoice === SCISSORS_CHOICE)
       ) {
-            return 'won!';
+            return VICTORY;
       } else if (
             (computerValue === PAPER_CHOICE && finalChoice === ROCK_CHOICE) ||
             (computerValue === ROCK_CHOICE && finalChoice === SCISSORS_CHOICE)
       ) {
-            return 'lost!';
+            return DEFEAT;
       } else {
-            return 'Draw!';
+            return DRAW;
       }
+}
+
+function resetGame() {
+      countDownValue = 3;
+      finalChoice = null;
+      currentChoice = null;
+      gameStarting = false;
+      playButton.classList.add('disabled');
 }
