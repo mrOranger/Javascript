@@ -65,4 +65,10 @@
       border-radius: 30px;
       border: 0px;
       background-color: #a167a5;
+      cursor: pointer;
+}
+
+.disabled {
+      background-color: gray;
+      cursor: not-allowed;
 }
