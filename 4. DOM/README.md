@@ -6,7 +6,9 @@ Since JavaScript is mainly used for front-end applications, is important to unde
 
 Let's take a look on how the HTML and JavaScript code interact with each other:
 
-<img src="../assets/DOM.png" alt="DOM & HTML" width="400"/>
+<p align="center">
+      <img src="../assets/DOM.png" alt="DOM & HTML" width="300"/>
+</p>
 
 when we create an HTML page with a JavaScript code connected to it, the browser and the interpreter parse and render both the code in order to use them. On the other hand, to make JavaScript able to use the HTML code, the Browser creates an object called **DOM** (_Document Object Model_), that is a sort of API that JavaScript can use to interact with the rendered HTML code.
 
@@ -29,4 +31,33 @@ However, the last paragraph is correct but incomplete, in fact, the DOM does not
 
 if we would like to represent this HTML as it is inside the DOM, the resoult would be something like this:
 
-<img src="../assets/DOM-tree.png" alt="A simple representation of the HTML in the DOM" width="400"/>
+<p align="center">
+      <img src="../assets/DOM-tree.png" alt="A simple representation of the HTML in the DOM" width="250"/>
+</p>
+
+## Element vs Node
+
+Unsuprisigly, the last chapter is not complete yet. Indeed, we have to examplain the difference between the rendered _elements_ of the HTML page and the _node_ that compose the DOM.
+
+Let's take a look on the previous example:
+
+```html
+<html>
+      <head>
+            <title>HTML</title>
+      </head>
+      <body>
+            <header>
+                  <p>This is the page's header</p>
+            </header>
+      </body>
+</html>
+```
+
+when the HTML code is translated in the DOM's tree, not only the HTML tags will be pushed as node in the structure, indeed, also white spaces are considered as nodes of the tree!
+
+Therefore, a closure representation of the DOM's tree is the following:
+
+<p align="center">
+      <img src="../assets/Elements-Nodes.png" alt="A simple representation of the HTML in the DOM" width="250"/>
+</p>
