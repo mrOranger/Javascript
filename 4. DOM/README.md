@@ -61,3 +61,42 @@ Therefore, a closure representation of the DOM's tree is the following:
 <p align="center">
       <img src="../assets/Elements-Nodes.png" alt="A simple representation of the HTML in the DOM" width="250"/>
 </p>
+
+where the grey nodes of the tree are the white spaces. Understanding the difference between these two elements, is a key concept to understand the difference between these two methods used to traverse the DOM:
+
+```javascript
+const elements = document.children;
+const nodes = document.childNodes;
+```
+
+However, if the white spaces are part of the DOM's tree, why these are not rendered to the browser. The answer is that, they are actually rendered by the browser, however, there is a CSS that hides them, that is _white-space: pre_
+
+## Creating new element in the DOM
+
+If we would like to create a new element to be inserted in the DOM's tree, there are two ways of doing this. Morevoer, there are two functions to use:
+
+- **innerHTML** that injects new HTML inside the existing code.
+
+- while, **createElement** that creates a new HTML element.
+
+What is the difference between them and why should we use one instead of another? Well, the difference is quite intuitive and evidente, while _innerHTML_ adds new HTML to the existing one, forces the browser to render the whole code again, therefore, if we are working on a huge project, it would be bad from performances point of view. An example of how to use the _innerHTML_ function is:
+
+```javascript
+const list = document.querySelector('ul');
+const newElement = `<li>New element</li>`;
+
+list.innerHTML = list.innerHTML + newElement;
+```
+
+On the other hand, creating a new element using the _createElement_ method, will not force the code to be parsed again, indeed, only the updated part will be parsed:
+
+```javascript
+const list = document.querySelector('ul');
+
+const newElement = document.createElement('li');
+newElement.textContent = 'New element';
+
+list.appendChild(newElement);
+```
+
+of course, the side node of this approach is that it required more code to be written.
