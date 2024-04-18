@@ -133,12 +133,27 @@ li {
       background-color: rgb(0, 255, 0, 0.6);
 }
 
-.input {
-      border: 1px solid var(--black);
-      background-color: var(--turquise);
-      width: 100%;
+.modal-body {
+      width: 80%;
 }
 
-.modal-body {
-      width: 100%;
+.form-input {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+}
+
+.form-input > * {
+      margin: 10px;
+}
+
+.form-input > input {
+      border: 1px solid var(--black);
+      background-color: var(--turquise);
+      height: 100%;
+      width: 60%;
+      padding: 5px;
+      border-radius: 5px;
+      font-size: medium;
 }

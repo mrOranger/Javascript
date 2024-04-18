@@ -12,9 +12,18 @@
                   <div class="modal">
                         <h1>Add a new movie</h1>
                         <main class="modal-body">
-                              <label>Title: <input type="text" class="input input-text" id="movie-title" /></label>
-                              <label>Description: <input type="text" class="input input-text" id="movie-desc" /></label>
-                              <label>Image: <input type="text" class="input input-text" id="movie-image" /></label>
+                              <div class="form-input">
+                                    <label for="movie-name" class="form-label">Title: </label>
+                                    <input type="text" class="input input-text" id="movie-title" name="movie-name" />
+                              </div>
+                              <div class="form-input">
+                                    <label for="movie-desc" class="form-label">Description: </label>
+                                    <input type="text" class="input input-text" id="movie-desc" name="movie-desc" />
+                              </div>
+                              <div class="form-input">
+                                    <label for="movie-image" class="form-label">Image: </label>
+                                    <input type="text" class="input input-text" id="movie-image" name="movie-image" />
+                              </div>
                         </main>
                         <footer class="modal-footer">
                               <button type="button" class="btn btn-delete" id="cancel-modal-btn">Cancel</button>
@@ -27,7 +36,7 @@
                   <button type="button" class="button primary" id="add-btn">Add new Movie</button>
             </nav>
             <main class="main">
-                  <li class="list" id="movie-list"></li>
+                  <div class="movie-list" id="movie-list"></div>
             </main>
             <footer class="footer flex justify-center items-center">
                   <p class="description">Powered by • mrOranger</p>
