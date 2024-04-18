@@ -8,19 +8,23 @@
             <script type="text/javascript" src="./script.js" defer></script>
       </head>
       <body>
-            <div class="modal-backdrop">
-                  <div class="modal-body">
-                        <h1>This will be the header</h1>
-                        <p>This will be the content</p>
-                        <footer>
-                              <button type="button" class="btn-delete">Cancel</button>
-                              <button type="button" class="btn-confirm">Confirm</button>
+            <div class="modal-backdrop" id="modal-backdrop">
+                  <div class="modal">
+                        <h1>Add a new movie</h1>
+                        <main class="modal-body">
+                              <label>Title: <input type="text" class="input input-text" id="movie-title" /></label>
+                              <label>Description: <input type="text" class="input input-text" id="movie-desc" /></label>
+                              <label>Image: <input type="text" class="input input-text" id="movie-image" /></label>
+                        </main>
+                        <footer class="modal-footer">
+                              <button type="button" class="btn btn-delete" id="cancel-modal-btn">Cancel</button>
+                              <button type="button" class="btn btn-confirm" id="confirm-modal-btn">Confirm</button>
                         </footer>
                   </div>
             </div>
             <nav class="nav">
                   <h1 class="nav-title">Movie Library</h1>
-                  <button type="button" class="button primary">Add new Movie</button>
+                  <button type="button" class="button primary" id="add-btn">Add new Movie</button>
             </nav>
             <main class="main">
                   <li class="list" id="movie-list"></li>
