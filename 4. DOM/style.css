@@ -40,6 +40,7 @@ body {
 }
 
 .main {
+      display: flex;
       width: 100%;
       height: 80vh;
       min-height: 400px;
@@ -51,6 +52,7 @@ li {
 }
 
 .footer {
+      display: inline-block;
       width: 100%;
       height: 10vh;
       min-height: 50px;
@@ -79,6 +81,7 @@ li {
       display: flex;
       justify-content: center;
       align-items: center;
+      visibility: hidden;
 }
 
 .modal {
@@ -156,4 +159,46 @@ li {
       padding: 5px;
       border-radius: 5px;
       font-size: medium;
+}
+
+.movie-list {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      padding: 20px;
+      overflow-y: scroll;
+      justify-content: space-evenly;
+      visibility: hidden;
+}
+
+.movie-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 20%;
+      height: fit-content;
+      padding: 10px;
+      margin: 10px;
+      background-color: var(--turquise);
+      border-radius: 10px;
+      border: 1px solid var(--black);
+}
+
+.movie-container > h1 {
+      margin: 5px 0px 5px 0px;
+      font-size: large;
+      text-align: center;
+}
+
+.movie-container > p {
+      margin: 5px 0px 5px 0px;
+      font-size: medium;
+      text-align: center;
+}
+
+.movie-container > img {
+      border-radius: 10px;
 }

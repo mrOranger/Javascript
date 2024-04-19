@@ -56,10 +56,14 @@ function resetElementValue(element) {
 }
 
 function createNewMovie(movie) {
+      movieList.style.visibility = 'visible';
+
       const movieContainer = document.createElement('div');
       const movieContainerTitle = document.createElement('h1');
       const movieContainerDescription = document.createElement('p');
       const movieContainerImage = document.createElement('img');
+
+      movieContainer.classList = 'movie-container';
 
       movieContainerTitle.textContent = movie.name;
       movieContainerDescription.textContent = movie.description;
