@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap');
+
+* {
+      font-family: 'Comic Neue';
+}
+
+.container {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+}
+
+ul {
+      width: 100%;
+      height: 100px;
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      padding: 0px;
+      margin: 0% 5% 0% 5%;
+}
+
+li {
+      padding: 3%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: transparent;
+      border-radius: 10px;
+      background-color: #fb8500;
+      font-size: xx-large;
+}
+
+.greater-than-3-list-item {
+      background-color: #8ecae6;
+}
+
+.power-of-2-list-item {
+      background-color: #ffb703;
+}
+
+.sum {
+      background-color: #219ebc;
+}
+
+.greatest-element {
+      background-color: #588157;
+}
