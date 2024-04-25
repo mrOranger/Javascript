@@ -2,3 +2,38 @@
       cursor: not-allowed;
       background-color: gainsboro;
 }
+
+.animated {
+      animation-name: introduction;
+      animation-duration: 2s;
+}
+
+@keyframes introduction {
+      0% {
+            transform: translateY(-8000px);
+      }
+
+      65% {
+            transform: translateY(50px);
+            transform: rotate(-5deg);
+      }
+
+      70% {
+            transform: translateY(50px);
+            transform: rotate(5deg);
+      }
+
+      100% {
+            transform: rotate(0deg);
+            transform: translateY(0px);
+      }
+}
+
+i {
+      transition: 1s;
+}
+
+i:hover {
+      transition: 1s;
+      transform: scale(1.2);
+}

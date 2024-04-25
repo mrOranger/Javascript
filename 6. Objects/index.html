@@ -5,6 +5,7 @@
             <meta name="description" content="Movie library" />
             <title>Objects</title>
             <link rel="stylesheet" href="./style.css" />
+            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" />
             <script src="https://cdn.tailwindcss.com"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
             <script type="text/javascript" src="./object.module.js"></script>
@@ -51,19 +52,25 @@
                               id="add-button"
                               class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-full m-5"
                               ng-disabled="!objectController.checkFormValidity()"
-                              ng-click="objectController.onAddNewEmployee(employee, property)">
+                              ng-click="objectController.onAddNewEmployee()">
                               Add new Employee!
                         </button>
                   </div>
-                  <ul>
-                        <li ng-repeat="employee in objectController.employees">
-                              <ol>
-                                    <li>{{ employee.firstName }}</li>
-                                    <li>{{ employee.lastName }}</li>
-                                    <li>{{ employee[property.key] }}</li>
-                              </ol>
-                        </li>
-                  </ul>
+                  <div class="grid grid-cols-3 m-10">
+                        <div
+                              ng-repeat="employee in objectController.employees track by $index"
+                              class="flex flex-row rounded-lg bg-violet-200 m-5 animated shadow-2xl">
+                              <img src="https://picsum.photos/200" class="rounded-l-lg" />
+                              <div class="h-full flex flex-col">
+                                    <i
+                                          class="w-full flex justify-end fa-solid fa-trash pr-5 pt-5"
+                                          ng-click="objectController.onRemoveEmployee($index)"></i>
+                                    <ul class="h-full flex flex-col justify-evenly items-center ml-5 mr-5">
+                                          <li ng-repeat="(key, value) in employee"><b>{{ key }}</b> : {{ value }}</li>
+                                    </ul>
+                              </div>
+                        </div>
+                  </div>
             </main>
       </body>
 </html>
