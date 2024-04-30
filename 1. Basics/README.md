@@ -18,13 +18,13 @@ JavaScript has a small set of Data Types, composed by the following elements:
 
 - _Number_ identifies numerical values, both with or without decimal part.
 
-- There is not a Data Type for represent directly characters like in Java, but there is ony one Data Type which is _String_.
+- There is not a Data Type for represent single characters like in Java, but there is only one Data Type which is _String_.
 
 - _Boolean_ is used for boolean values, of course.
 
-- _Object_ is the most used Data Type and we can assume that everything except the previous Data Type is of type Object. On the other hand, object represets elements with key-value pairs.
+- _Object_ is the most used Data Type, we can assume that everything except the previous Data Types, is an Object. On the other hand, object represets also elements with key-value pairs.
 
-- Finally, the last but not least is _Array_, representing a generic collection of elements. However, soon we will see that Array are no more tha objects.
+- Finally, the last but not least, _Array_ represents a generic collection of elements. However, soon we will see that Array are no more tha objects.
 
 ### + Operator
 
@@ -34,11 +34,17 @@ There is a long list of operators in JavaScript, however I think that most of yo
 3 + '3' = '33'
 ```
 
-... what's wrong with JavaScript? The answer is nothing. Indeed, the _+_ operator is used both for string concations and sum of numbers, but in this case is used only for string concatenation, in a sort of precedent order. Therefore, the number 3 is treated as a string instead of a number.
+... what's wrong with JavaScript? The answer is nothing! Indeed, the `+` operator is used both for string concations and sum of numbers, but in this case is used only for string concatenation, in a sort of precedent order. Therefore, the number 3 is treated as a string instead of a number. Let's take a look on another common piece of code:
+
+```javascript
+('b' + 'a' + + 'a' + 'a').toLowerCase(); // banana
+```
+
+how is it possible that `'b' + 'a' + + 'a' + 'a'` returns `banana`? If you remove `toLowerCase` this answer is quite easy to understand, since the output would be `baNaNa`, in fact `+ + 'a'` is interpreted by JavaScript as `+ ( + 'a')` (concat the previous string with the result of + 'a', which is a casting operator from string to number), however since the casting operator cannot convert the character 'a' to a number, return the 'NaN' string (Not a Number). 
 
 ## Functions
 
-Functions in JavaScript are defined using the _function_ keyword, but there is also another way of defining functions that we will see later. For example, for define a function that takes two parameters and returns the sum of them, we can write:
+Functions in JavaScript are defined using the `function` keyword, but there is also another way of defining functions that we will see later. For example, for define a function that takes two parameters and returns the sum of them, we can write:
 
 ```javascript
 function sum(a, b) {
