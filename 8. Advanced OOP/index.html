@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+      <head>
+            <meta charset="UTF-8" />
+            <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+            <meta name="description" content="Advanced OOP" />
+            <title>Advanced OOP</title>
+            <link rel="stylesheet" href="./style.css" />
+            <script src="https://cdn.tailwindcss.com"></script>
+      </head>
+      <body class="w-screen h-screen">
+            <header id="header" class="flex justify-center items-center w-full h-fit bg-rose-500 p-10">
+                  <h1 class="font-sans text-4xl text-rose-50 text-center">Project Management 2.0</h1>
+            </header>
+            <main id="main" class="w-full bg-rose-100 flex flex-col justify-center items-center">
+                  <section id="active-projects" class="w-2/3 m-10 rounded-lg border-2 border-emerald-500 flex flex-col">
+                        <div class="w-full h-1/4">
+                              <h1
+                                    id="active-projects-header"
+                                    class="w-full font-sans text-3xl text-center bg-emerald-500 p-3 text-zinc-100">
+                                    Active Projects
+                              </h1>
+                        </div>
+                        <ul class="p-10" id="active-projects-list"></ul>
+                  </section>
+                  <section
+                        id="finished-projects"
+                        class="w-2/3 m-10 rounded-lg border-2 border-indigo-500 flex flex-col">
+                        <div class="w-full h-1/4">
+                              <h1
+                                    id="unactive-projects-header"
+                                    class="w-full font-sans text-3xl text-center bg-indigo-500 p-3 text-zinc-100">
+                                    Unactive Projects
+                              </h1>
+                        </div>
+                        <ul class="p-10" id="unactive-projects-list"></ul>
+                  </section>
+            </main>
+            <script type="text/javascript" src="script.js" defer></script>
+      </body>
+</html>
