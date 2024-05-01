@@ -21,100 +21,134 @@ class Project {
             li.id = `project-${this.id}`;
             li.classList.add('border-2', 'border-indigo-200', 'mt-5', 'mb-5', 'rounded-lg');
 
+            li.appendChild(this.#renderTitle());
+            li.appendChild(this.#renderProjectManager());
+            li.appendChild(this.#renderDescription());
+            li.appendChild(this.#renderButtons());
+            li.appendChild(this.#renderTimestampsDetails());
+
+            if (this.active) {
+                  document.getElementById('active-projects-list').appendChild(li);
+            } else {
+                  document.getElementById('unactive-projects-list').appendChild(li);
+            }
+      }
+
+      #renderTitle() {
             const h1 = document.createElement('h1');
             h1.classList.add('font-sans', 'text-2xl', 'm-5');
             h1.innerText = `Progetto ${this.id}`;
-            li.appendChild(h1);
+            return h1;
+      }
 
+      #renderProjectManager() {
             const h3 = document.createElement('h3');
             h3.classList.add('text-xl', 'm-3');
             h3.textContent = `Project Manager : ${this.projectManager.firstName} ${this.projectManager.lastName}`;
-            li.appendChild(h3);
+            return h3;
+      }
 
+      #renderDescription() {
             const p = document.createElement('p');
             p.classList.add('text-justify', 'm-3');
             p.textContent = this.description;
-            li.appendChild(p);
+            return p;
+      }
 
+      #renderButtons() {
             const buttonsDiv = document.createElement('div');
             buttonsDiv.classList.add('w-full', 'flex', 'flex-row', 'justify-start', 'items-center', 'm-5');
 
             if (this.active) {
-                  const stopButton = document.createElement('button');
-                  stopButton.classList.add(
-                        'w-1/6',
-                        'bg-rose-400',
-                        'mr-5',
-                        'p-2',
-                        'rounded-lg',
-                        'text-zinc-100',
-                        'cursor-pointer',
-                        'transition',
-                        'ease-in-out',
-                        'delay-150',
-                        'bg-rose-500',
-                        'hover:-translate-y-1',
-                        'hover:scale-110',
-                        'hover:bg-rose-500',
-                        'duration-300',
-                  );
-                  stopButton.textContent = 'Stop';
-
-                  stopButton.addEventListener('click', this.onStop.bind(this));
-
-                  buttonsDiv.appendChild(stopButton);
+                  buttonsDiv.appendChild(this.#renderStopButton());
             } else {
-                  const deleteButton = document.createElement('button');
-                  const startButton = document.createElement('button');
-
-                  startButton.classList.add(
-                        'w-1/6',
-                        'bg-green-300',
-                        'mr-5',
-                        'p-2',
-                        'rounded-lg',
-                        'text-zinc-100',
-                        'cursor-pointer',
-                        'transition',
-                        'ease-in-out',
-                        'delay-150',
-                        'bg-green-500',
-                        'hover:-translate-y-1',
-                        'hover:scale-110',
-                        'hover:bg-green-500',
-                        'duration-300',
-                  );
-
-                  deleteButton.classList.add(
-                        'w-1/6',
-                        'bg-rose-400',
-                        'mr-5',
-                        'p-2',
-                        'rounded-lg',
-                        'text-zinc-100',
-                        'cursor-pointer',
-                        'transition',
-                        'ease-in-out',
-                        'delay-150',
-                        'bg-rose-500',
-                        'hover:-translate-y-1',
-                        'hover:scale-110',
-                        'hover:bg-rose-500',
-                        'duration-300',
-                  );
-
-                  startButton.textContent = 'Start';
-                  deleteButton.textContent = 'Delete';
-
-                  startButton.addEventListener('click', this.onStart.bind(this));
-                  deleteButton.addEventListener('click', this.onDelete.bind(this));
-
-                  buttonsDiv.appendChild(startButton);
-                  buttonsDiv.appendChild(deleteButton);
+                  buttonsDiv.appendChild(this.#renderStartButton());
+                  buttonsDiv.appendChild(this.#renderDeleteButton());
             }
 
-            li.appendChild(buttonsDiv);
+            return buttonsDiv;
+      }
 
+      #renderStartButton() {
+            const startButton = document.createElement('button');
+
+            startButton.classList.add(
+                  'w-1/6',
+                  'bg-green-300',
+                  'mr-5',
+                  'p-2',
+                  'rounded-lg',
+                  'text-zinc-100',
+                  'cursor-pointer',
+                  'transition',
+                  'ease-in-out',
+                  'delay-150',
+                  'bg-green-500',
+                  'hover:-translate-y-1',
+                  'hover:scale-110',
+                  'hover:bg-green-500',
+                  'duration-300',
+            );
+
+            startButton.textContent = 'Start';
+            startButton.addEventListener('click', this.onStart.bind(this));
+
+            return startButton;
+      }
+
+      #renderStopButton() {
+            const stopButton = document.createElement('button');
+
+            stopButton.classList.add(
+                  'w-1/6',
+                  'bg-rose-400',
+                  'mr-5',
+                  'p-2',
+                  'rounded-lg',
+                  'text-zinc-100',
+                  'cursor-pointer',
+                  'transition',
+                  'ease-in-out',
+                  'delay-150',
+                  'bg-rose-500',
+                  'hover:-translate-y-1',
+                  'hover:scale-110',
+                  'hover:bg-rose-500',
+                  'duration-300',
+            );
+            stopButton.textContent = 'Stop';
+            stopButton.addEventListener('click', this.onStop.bind(this));
+
+            return stopButton;
+      }
+
+      #renderDeleteButton() {
+            const deleteButton = document.createElement('button');
+
+            deleteButton.classList.add(
+                  'w-1/6',
+                  'bg-rose-400',
+                  'mr-5',
+                  'p-2',
+                  'rounded-lg',
+                  'text-zinc-100',
+                  'cursor-pointer',
+                  'transition',
+                  'ease-in-out',
+                  'delay-150',
+                  'bg-rose-500',
+                  'hover:-translate-y-1',
+                  'hover:scale-110',
+                  'hover:bg-rose-500',
+                  'duration-300',
+            );
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', this.onDelete.bind(this));
+
+            return deleteButton;
+      }
+
+      #renderTimestampsDetails() {
             const divTimelineInfo = document.createElement('div');
             divTimelineInfo.classList.add('w-full', 'flex', 'flex-col', 'm-3');
 
@@ -128,25 +162,35 @@ class Project {
             updatedAt.textContent = `Updated at : ${this.updatedAt}`;
             divTimelineInfo.appendChild(updatedAt);
 
-            li.appendChild(divTimelineInfo);
-
-            if (this.active) {
-                  document.getElementById('active-projects-list').appendChild(li);
-            } else {
-                  document.getElementById('unactive-projects-list').appendChild(li);
-            }
+            return divTimelineInfo;
       }
 
       onDelete() {
             document.getElementById(`project-${this.id}`).remove();
+
+            const unactiveProjectsHeader = document.getElementById('unactive-projects-header');
+
+            unactiveProjectsHeader.textContent = `Unctive Projects : ${ProjectsList.getUnactiveProjectsNumber()}`;
       }
 
       onStop() {
             this.move();
+
+            const activeProjectsHeader = document.getElementById('active-projects-header');
+            const unactiveProjectsHeader = document.getElementById('unactive-projects-header');
+
+            activeProjectsHeader.textContent = `Active Projects : ${ProjectsList.getActiveProjectsNumber()}`;
+            unactiveProjectsHeader.textContent = `Unctive Projects : ${ProjectsList.getUnactiveProjectsNumber()}`;
       }
 
       onStart() {
             this.move();
+
+            const activeProjectsHeader = document.getElementById('active-projects-header');
+            const unactiveProjectsHeader = document.getElementById('unactive-projects-header');
+
+            activeProjectsHeader.textContent = `Active Projects : ${ProjectsList.getActiveProjectsNumber()}`;
+            unactiveProjectsHeader.textContent = `Unctive Projects : ${ProjectsList.getUnactiveProjectsNumber()}`;
       }
 }
 
@@ -164,14 +208,19 @@ class ProjectsList {
 
       renderAll() {
             this.projects.forEach((project) => project.render());
+            const activeProjectsHeader = document.getElementById('active-projects-header');
+            const unactiveProjectsHeader = document.getElementById('unactive-projects-header');
+
+            activeProjectsHeader.textContent = `Active Projects : ${ProjectsList.getActiveProjectsNumber()}`;
+            unactiveProjectsHeader.textContent = `Unctive Projects : ${ProjectsList.getUnactiveProjectsNumber()}`;
       }
 
-      get activeProjects() {
-            return this.projects.filter((project) => project.active);
+      static getActiveProjectsNumber() {
+            return document.querySelectorAll('#active-projects-list > li').length;
       }
 
-      get finishedProjects() {
-            return this.projects.filter((project) => !project.active);
+      static getUnactiveProjectsNumber() {
+            return document.querySelectorAll('#unactive-projects-list > li').length;
       }
 }
 
