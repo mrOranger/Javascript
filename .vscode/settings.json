@@ -1,4 +1,6 @@
 {
+      "apc.font.family": "Fira Code",
+      "apc.monospace.font.family": "Fira Code",
       "editor.fontFamily": "Azeret Mono",
       "editor.fontSize": 13,
       "editor.cursorBlinking": "expand",
