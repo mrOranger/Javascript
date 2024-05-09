@@ -1,7 +1,7 @@
 {
       "apc.font.family": "Fira Code",
       "apc.monospace.font.family": "Fira Code",
-      "editor.fontFamily": "Azeret Mono",
+      "editor.fontFamily": "DM Mono",
       "editor.fontSize": 13,
       "editor.cursorBlinking": "expand",
       "editor.cursorStyle": "block-outline",
@@ -55,7 +55,7 @@
       "workbench.tree.renderIndentGuides": "none",
       "window.zoomLevel": 1,
       "editor.minimap.enabled": false,
-      "terminal.integrated.fontFamily": "Fira Code",
+      "terminal.integrated.fontFamily": "DM Mono",
       "terminal.integrated.fontSize": 13,
       "terminal.integrated.fontWeightBold": "bold",
       "terminal.integrated.lineHeight": 1.3,
