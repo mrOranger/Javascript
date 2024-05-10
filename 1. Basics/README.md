@@ -26,6 +26,52 @@ JavaScript has a small set of Data Types, composed by the following elements:
 
 - Finally, the last but not least, _Array_ represents a generic collection of elements. However, soon we will see that Array are no more tha objects.
 
+### Numbers
+
+Every number is JavaScript is a _floating point number_ and is stored using double precision representation, thus with 64 bits. Inside the `Number` class there are some useful properties to see the maximum and minium numbers that can be represented in JavaScript, for example: `Number.MIN_SAFE_INTEGER` is the minimun integer value that can be used. On the other hand, if you would like to know the minumum and maximum numbers (not integers) properties `Number.MIN_VALUE` and `Number.MAX_VALUE` indicate them.
+
+There is an alternative type to `Number` in JavaScript, that allows us to overcome the size limitations of 64-bit numbers, and is `BigInt`. To declare a number as a `BigInt` is necessary to postfix `n` to the number, like this `123458n`. From an internal point of view, `BigInt` numbers are actually stored as strings, to overcome the mathematical limitation of their double precision representation. However, is not allowed to mix `BigInt` numbers with normal numbers, classic number's mathemtical operations are allowed only between `BigInt` and `BigInt`.
+
+### Strings
+
+There are three different ways to declare a string in JavaScript, by using single quotes, double quotes or backticks. On the other hand, the last way is the most flexible to create strings with variable parameters that must be concatenated in the former.
+
+Working with strings we would like to look for specific patterns in a string, and then **Regular Expression** helps us in this job. There are two different ways to define a Regular Expression:
+
+- By using the `new` keyword, creating a new Regular Expression object `new RegExp()`.
+
+- Using the double forward slashes `//`, and define our pattern inside them.
+
+Let's see an example of how Regular Expression works, starting with the simple task of looking for the specific pattern `hello` inside any string:
+
+```javascript
+const regExp = /hello/;
+regExp.test('hello'); // true
+regExp.test('hello world!'); // true
+regExp.test('hi, and Hello!'); // false
+```
+
+However, we are acntually looking for a string that matches exactly the word `hello`. On the other hand, a string like `Hello` won't pass the matching test, therefore we need to modify our pattern to consider also uppercase characters:
+
+```javascript
+const regExp = /(h|H)ello/;
+regExp.test('hello'); // true
+regExp.test('Hello world!'); // true
+regExp.test('hi, and Hello!'); // true
+```
+
+In fact, by using the pipe operator `|` we are indicating that a specific character of our pattern can assume different configurations. However, if we do not care about a character and we want indicate in the regular expression that a specific character can assume any value, we can use the `.` wildcard.
+
+```javascript
+const regExp = /.ello/;
+regExp.test('hello'); // true
+regExp.test('Hello world!'); // true
+regExp.test('hi, and ello!'); // false
+regExp.test('hi, and Pello!'); // true
+```
+
+Of course, there are many other wildcards used in regular expression to create them, and since this is a complex theme, you can find details [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_expressions).
+
 ### + Operator
 
 There is a long list of operators in JavaScript, however I think that most of your have seen at least one time the following code as meme for JavaScript:
@@ -34,13 +80,13 @@ There is a long list of operators in JavaScript, however I think that most of yo
 3 + '3' = '33'
 ```
 
-... what's wrong with JavaScript? The answer is nothing! Indeed, the `+` operator is used both for string concations and sum of numbers, but in this case is used only for string concatenation, in a sort of precedent order. Therefore, the number 3 is treated as a string instead of a number. Let's take a look on another common piece of code:
+... what's wrong with JavaScript? The answer is nothing! Indeed, the `+` operator is used both for string's concation and sum of numbers, but in this case is used only for string concatenation, in a sort of precedent order. Therefore, the number 3 is treated as a string instead of a number. Let's take a look on another common piece of code:
 
 ```javascript
-('b' + 'a' + + 'a' + 'a').toLowerCase(); // banana
+('b' + 'a' + +'a' + 'a').toLowerCase(); // banana
 ```
 
-how is it possible that `'b' + 'a' + + 'a' + 'a'` returns `banana`? If you remove `toLowerCase` this answer is quite easy to understand, since the output would be `baNaNa`, in fact `+ + 'a'` is interpreted by JavaScript as `+ ( + 'a')` (concat the previous string with the result of + 'a', which is a casting operator from string to number), however since the casting operator cannot convert the character 'a' to a number, return the 'NaN' string (Not a Number). 
+how is it possible that `'b' + 'a' + + 'a' + 'a'` returns `banana`? If you remove `toLowerCase` this answer is quite easy to understand, since the output would be `baNaNa`, in fact `+ + 'a'` is interpreted by JavaScript as `+ ( + 'a')` (concat the previous string with the result of + 'a', which is a casting operator from string to number), however since the casting operator cannot convert the character 'a' to a number, return the 'NaN' string (Not a Number).
 
 ## Functions
 
