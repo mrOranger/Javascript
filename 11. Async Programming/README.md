@@ -46,7 +46,9 @@ anotherFunction();
 
 If we would like to represent this simple program in a diagram, something like this will be created:
 
-![Representation of JavaScript's Memory](../assets/JavaScript-Memory.jpg)
+<p align="center">
+  <img src="../assets/JavaScript-Memory.jpg" />
+</p>
 
 When the program is started, the two objects are added in the _Heap_ while the two callback functions are registered but they are not pushed into the stack, because the event associated to them is not triggered yet by a message. On the other the function `anotherFunction` is pushed into the stack and then the function `aFunction` too because is immediately called by the former. At some point while `aFunction` is executed but not completed yet, some messages are enqueued in the Queue, these are `click`, `hover` and `click` again, thus the _Event Loop_ recognize that a messages in enqueued and can push the associated callback function that is `onClickEvent` in the _Stack_,
 
