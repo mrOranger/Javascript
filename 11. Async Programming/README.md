@@ -221,9 +221,7 @@ Running this code, you will notice that the logs for the function `asyncPromiseH
 
 ## Promise.race(), Promise.all() & Promise.allSettled()
 
-There are three more utility methods implemented inside the `Promise` class, that can be very useful when dealing with multiple asynchronous code blocks exection.
-
-If we would like to run multiple promises with different implementations, and get the result of the fastest way, we can use the `Promise.race()` method. This method takes an interable as input, that can be for example an array of promises, and returns the fastest promise that is fulfilled or rejected. For instance:
+There are three more utility methods implemented inside the `Promise` class, that can be very useful when dealing with multiple asynchronous code blocks exection. If we would like to run multiple promises with different implementations, and get the result of the fastest one, you can use the `Promise.race()` method. This method takes an interable as input, that can be for example an array of promises, and returns the fastest promise that is fulfilled or rejected. For instance:
 
 ```javascript
 function firstPromise() {
@@ -247,9 +245,7 @@ Promise.race([firstPromise(), secondPromise()])
       .catch((err) => console.error(err));
 ```
 
-the printed value will be always `second`, since the second promise is always the fastest between these. On the other hand, if the `secondPromise` to fail, the catch block will be triggered.
-
-If `Promise.race` returns the fastest Promise, we would like to execute all the promises togheter and get the resulting value from each execution. `Promise.all` in fact, executes everything, combining the result in just one array:
+the printed value will be always `second`, since the second promise is always the fastest between these. On the other hand, if the `secondPromise` to fail, the catch block will be triggered. If `Promise.race` returns the fastest Promise, we would like to execute all the promises togheter and get the resulting value from each execution. `Promise.all` in fact, executes everything, combining the result in just one array:
 
 ```javascript
 function firstPromise() {

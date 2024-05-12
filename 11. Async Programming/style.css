@@ -1,0 +1,21 @@
+.chat {
+      overflow-x: hidden;
+      overflow-y: hidden;
+      height: 60vh;
+}
+
+.messages {
+      width: 100%;
+      height: 90%;
+      overflow-x: hidden;
+      overflow-y: scroll;
+}
+
+.footer {
+      width: 100%;
+      height: 10%;
+}
+
+.chat-input {
+      width: 90%;
+}
