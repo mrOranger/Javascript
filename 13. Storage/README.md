@@ -25,6 +25,56 @@ There are few methods available both from `sessionStorage` and `localStorage` ob
 
 However, there are some cases where the user cannot allow the Browser to store data, sometimes due to security or browser's configuration reasons. In both cases, storing data using the `getItem` method can be throw a `DOMException` that needs to be catched and managed.
 
+In both cases, we cannot store complex data directly but only privitive values such as `Number` or `String`, that is because the `setItem` method, stores only string values and then invokes the `toString` method on every value that we require to store. Therefore, a simple object's value is stored as `[object Object]`. However, there is a workaraound to store objects using primitive types, that is converting an object in its string representation using the `JSON.strigify` method:
+
+```javascript
+const aNumber = 1;
+const aString 'hello world';
+const anObject = {
+    firstName : 'Mario',
+    lastName : 'Rossi'
+};
+
+sessionStorage.setItem('aNumber', aNumber);
+sessionStorage.setItem('aString', aString);
+sessionStorage.setItem('anObject', anObject);
+sessionStorage.setItem('anObject', JSON.stringify(anObject));
+```
+
+On the other hand, if we would like to store objects' values without using the `JSON.strigify` method, we can override the `toString` method in the class, that will be automatically invoked when we will store the value in the Storage:
+
+```javascript
+function Person(firstName, lastName) {
+      this.firstName = firstName;
+      this.lastName = lastName;
+
+      Person.prototype.toString = function toString() {
+            return `${this.firstName} ${this.lastName}`;
+      };
+}
+
+localStorage.setItem('person', new Person('Mario', 'Rossi'));
+localStorage.getItem('person'); // Mario Rossi
+```
+
 ## Cookies
 
-## IndexedDb
+Browser's storage allows us to store data only in the browser, without exchanging information with the server directly. Another way to store user's data also both in frontend and in the backend, is to use **Cookies**. Cookies are additional key-value pairs of information stored in an HTTP message, and that can be accessed both from frontend and backend.
+
+JavaScript allows us to access cookies data using the `document` object. However, differently from the classic browser's storage, storing and retrieving cookies is more cumbersome, since there are no methods defined in JavaScript to manipulate cookies' data and they are stored as a string. The following example shows how can we access and write cookies in JavaScript:
+
+```javascript
+const aNumber = 1;
+
+const person = {
+      firstName: 'Mario',
+      lastName: 'Ross',
+};
+
+document.cookie += `number=${aNumber};`;
+console.log(document.cookie); //number=1;
+
+document.cookie += `person=${JSON.stringify(person)};`;
+```
+
+## IndexedDB
