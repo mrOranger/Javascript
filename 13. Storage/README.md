@@ -78,3 +78,49 @@ document.cookie += `person=${JSON.stringify(person)};`;
 ```
 
 ## IndexedDB
+
+There is an internal key-value based database in the borwser that allows us to implement powerful application, with enriched query abilities, moreover, the **IndexedDB** allows us to work both online and offline. IndexedDB allows to persist data only between sessions of the same domain, thus, preventing clients working on different domains to access data without having permission and avoiding collisions between data stored below the same key.
+
+Access or storing data in the database are made in a single **transaction** like in more complex databases. Moreover, most of operations made in the database are asynchronous, therefore, we cannot access data in the same way we did with Storage but only using callbacks functions, named **requests**.
+
+Each request made to the database can assume two values between **success** or **failure**, they have also other internal properties like **readyState**, **result** or **errorCode**.
+
+There is a basic pattern that is encouraged to follow when we are working with the indexedDB, that is:
+
+1. Open a new database.
+2. Create the objects that have to be persisted.
+3. Start a new transaction.
+4. Register a new listener and wait for the operation to be completed or rejected.
+5. Manipulate the result.
+
+### Create a new database instance
+
+Working with an IndexedDB requires to create a new database instance, using the following code:
+
+```javascript
+const databaseRequest = indexedDB.open('MyDatabase', 1);
+```
+
+with the code above, we are not starting any transaction but we are just making a request to the database to create a new instance with the given name, and with the following version. In fact, we can create different databases' instances using the same name, but specifying another version, to distinguish between updated schemas of the same instance.
+
+The `open` method returns an instance of `IDBRequest` interface that can success or fail. When we create a new instance of the database, the `onupgradedneeded` event is fired, and we create the schema of the database inside the callback function registered to listen this event.
+
+Once we create a new instance of the database, we can proceed to register the callback functions for handling errors of successes:
+
+```javascript
+const databaseRequest = indexedDB.open('MyDatabase', 1);
+
+databaseRequest.onerror = function onError(event) {
+      console.error('A problem occurred in opening the database, check you permission.');
+};
+
+databaseRequest.onupgradeneeded = function onUpgradeneeded(event) {
+      const database = event.target.result;
+
+      console.log('A new version of the database has been created.');
+};
+
+databaseRequest.onsuccess = function onSuccess(event) {
+      console.log('Database created successfully!');
+};
+```
