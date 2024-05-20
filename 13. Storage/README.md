@@ -1,6 +1,6 @@
 # Data Storage in JavaScript
 
-User's data are typically stored in the backend of out application, because we do not want to make them accessibile easily also by the same user. However, there are some cases where it is desirable to store some data inside the browser, of course we are not talking about critical information, since they are still subject to security issues. There are many examples of data stored inside the browser in our daily life, for example, if you have used an e-commerce website, it is quite probable that the _shopping list_ has beed implemented using browser's storage.
+User's data are typically stored in the backend of our application, because we do not want to make them accessibile easily. However, there are some cases where it is desirable to store some data inside the browser, of course we are not talking about critical information, since they are still subject to security issues. There are many examples of data stored inside the browser in our daily life, for example, if you have used an e-commerce website, it is quite probable that the _shopping list_ has beed implemented using browser's storage.
 
 In JavaScript there are three main differen types of Browser's storage:
 
