@@ -1,7 +1,7 @@
 {
-      "apc.font.family": "Fira Code",
-      "apc.monospace.font.family": "Fira Code",
-      "editor.fontFamily": "Fira Code",
+      "apc.font.family": "Monaco",
+      "apc.monospace.font.family": "Monaco",
+      "editor.fontFamily": "Monaco",
       "editor.fontSize": 13,
       "editor.cursorBlinking": "expand",
       "editor.cursorStyle": "block-outline",
