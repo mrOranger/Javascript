@@ -1,0 +1,27 @@
+{
+      "name": "whereami",
+      "version": "1.0.0",
+      "description": "JavaScript's final project. A web app to share places using Google Maps API",
+      "main": "index.js",
+      "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "repository": {
+            "type": "git",
+            "url": "git+https://github.com/mrOranger/Javascript.git"
+      },
+      "keywords": [
+            "javascript",
+            "node",
+            "npm",
+            "webpack",
+            "babel",
+            "eslint"
+      ],
+      "author": "Edoardo Oranger (mrOranger)",
+      "license": "ISC",
+      "bugs": {
+            "url": "https://github.com/mrOranger/Javascript/issues"
+      },
+      "homepage": "https://github.com/mrOranger/Javascript#readme"
+}
