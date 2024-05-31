@@ -23,5 +23,8 @@
       "bugs": {
             "url": "https://github.com/mrOranger/Javascript/issues"
       },
-      "homepage": "https://github.com/mrOranger/Javascript#readme"
+      "homepage": "https://github.com/mrOranger/Javascript#readme",
+      "devDependencies": {
+            "eslint": "^9.3.0"
+      }
 }
