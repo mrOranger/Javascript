@@ -8,4 +8,5 @@ module.exports = {
             path: path.resolve(__dirname, 'dist', 'scripts'),
             publicPath: path.resolve(__dirname, 'dist', 'scripts'),
       },
+      devtool: 'cheap-module-eval-source-map',
 };
