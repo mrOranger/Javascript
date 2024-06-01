@@ -10,5 +10,8 @@ module.exports = {
             publicPath: path.resolve(__dirname, 'dist', 'scripts'),
       },
       devtool: 'eval-cheap-module-source-map',
+      devServer: {
+            static: path.resolve(__dirname),
+      },
       plugins: [new CleanPlugin.CleanWebpackPlugin()],
 };
