@@ -5,7 +5,7 @@ module.exports = {
       entry: './src/index.js',
       mode: 'production',
       output: {
-            filename: 'app.js',
+            filename: '[contenthash].js',
             path: path.resolve(__dirname, 'dist', 'scripts'),
             publicPath: path.resolve(__dirname, 'dist', 'scripts'),
       },
