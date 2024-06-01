@@ -14,6 +14,6 @@ Let's start with a list of tools whose purpose is to solve the problems above. O
 
 However, **webpack** does not provide any configuration to ensure the code's quality, for this reason we will use another tool known as [**eslint**](https://eslint.org/). Moreover, eslint is nor just a code quality checker, it also find and report errors in our code, which is an great feature for a language like JavaScript, since it is a _weakly typed language_.
 
-Last but not least, we will use [**Babel**](https://babeljs.io/docs/), to ensure that our code is also compatible with older versions of browsers. This is a key feature if we are programming to deploy our code in a production environment.
+Last but not least, we will use [**Babel**](https://babeljs.io/docs/), to ensure that our code is also compatible with older browser's versions. This is a key feature if we are programming to deploy our code in a production environment. Babel in fact, _transpile_ (that is convert) our code with newer features (like `let`, `const` and `async/await`)in a code that can be executed in a browser which does not support these features.
 
 Moreover, there is an additional tool that we will use to _orchestrate the development process_, that is [**npm**](https://docs.npmjs.com/about-npm). By using npm we will separate the development from the deploy process, creating two workflows to execute in different times.
