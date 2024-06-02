@@ -46,6 +46,6 @@ module.exports = {
       },
       plugins: [
             new CleanPlugin.CleanWebpackPlugin(),
-            new HtmlWebpackPlugin({ title: 'WhereAmI', filename: 'index.html', template: './src/index.html' }),
+            new HtmlWebpackPlugin({ title: 'ToDos', filename: 'index.html', template: './src/index.html' }),
       ],
 };
