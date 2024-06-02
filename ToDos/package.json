@@ -1,5 +1,5 @@
 {
-      "name": "whereami",
+      "name": "todos",
       "version": "1.0.0",
       "description": "JavaScript's final project. A web app to share places using Google Maps API",
       "main": "index.js",

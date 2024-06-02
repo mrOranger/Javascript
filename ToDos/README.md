@@ -1,4 +1,4 @@
-# WhereAmI
+# ToDos
 
 ## Basics JavaScript project's limitations
 
