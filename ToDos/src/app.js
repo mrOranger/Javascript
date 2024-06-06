@@ -15,9 +15,9 @@ const updateActionElement = document.querySelector('#updateAction');
 const patchStateActionElement = document.querySelector('#patchStateAction');
 const deleteActionElement = document.querySelector('#deleteAction');
 
-const getAllAction = new GetAllAction(getAllActionElement, header);
-const getByIdAction = new GetByIdAction(getByIdActionElement, header);
-const saveAction = new SaveAction(saveActionElement, header);
-const updateAction = new UpdateAction(updateActionElement, header);
-const patchStateAction = new PatchStateAction(patchStateActionElement, header);
-const deleteAction = new DeleteAction(deleteActionElement, header);
+const getAllAction = new GetAllAction(getAllActionElement, body);
+const getByIdAction = new GetByIdAction(getByIdActionElement, body);
+const saveAction = new SaveAction(saveActionElement, body);
+const updateAction = new UpdateAction(updateActionElement, body);
+const patchStateAction = new PatchStateAction(patchStateActionElement, body);
+const deleteAction = new DeleteAction(deleteActionElement, body);

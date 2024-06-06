@@ -1,17 +1,20 @@
 import { TodoService } from '../../services/todo.service';
 import { Alert } from '../alerts/alert.component';
+import { Spinner } from '../spinner/spinner.component';
 
 export class GetAllAction {
-      constructor(htmlActioButton) {
-            this.htmlActioButton = htmlActioButton;
+      constructor(htmlActionButton, body) {
+            this.body = body;
+            this.htmlActionButton = htmlActionButton;
             this.#initListener();
       }
 
       #initListener() {
-            this.htmlActioButton.addEventListener('click', this.#onGetAllTodos.bind(this));
+            this.htmlActionButton.addEventListener('click', this.#onGetAllTodos.bind(this));
       }
 
       #onGetAllTodos() {
+            this.body.appendChild(Spinner.render('normal'));
             TodoService.getAll()
                   .then((response) => {
                         const { statusCode, data, message, success } = response;
