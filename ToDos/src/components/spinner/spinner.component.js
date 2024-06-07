@@ -1,5 +1,5 @@
 export class Spinner {
-      static render(type) {
+      static render(type, message = 'Loading ...') {
             const body = document.querySelector('body');
 
             const container = document.createElement('div');
@@ -15,7 +15,7 @@ export class Spinner {
             div.role = 'status';
 
             span.classList.add('sr-only');
-            span.innerHTML = 'Loading ...';
+            span.innerHTML = message;
 
             div.appendChild(span);
 

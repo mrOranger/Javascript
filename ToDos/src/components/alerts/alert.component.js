@@ -8,11 +8,16 @@ export class Alert {
             div.innerHTML = message;
 
             header.appendChild(div);
+
+            setTimeout(() => div.remove(), 4000);
       }
 
       static #getAlertClasses(type) {
             if (type === 'error') {
                   return ['alert', 'alert-danger'];
+            }
+            if (type === 'info') {
+                  return ['alert', 'alert-info'];
             }
             return ['alert', 'alert-primary'];
       }

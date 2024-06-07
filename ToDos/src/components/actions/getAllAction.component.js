@@ -19,17 +19,17 @@ export class GetAllAction {
                   .then((response) => {
                         const { statusCode, data, message, success } = response;
                         if (success && statusCode === 200) {
+                              if (data.length === 0) {
+                                    Alert.render(`There are no ToDos, please add a new one.`, `info`);
+                              }
                               console.log(data);
                         } else {
                               console.info(message);
-                              this.alert.message = `Opss ... I'm so sorry but there is a problem with the network. Please, try later.`;
-                              this.alert.type = 'error';
-                              this.alert.render();
+                              Alert.render(
+                                    `Opss ... I'm so sorry but there is a problem with the network. Please, try later.`,
+                                    `error`,
+                              );
                         }
-                        Alert.render(
-                              `Opss ... I'm so sorry but there is a problem with the network. Please, try later.`,
-                              `error`,
-                        );
                   })
                   .catch((error) => {
                         console.error(error);
