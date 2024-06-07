@@ -23,8 +23,18 @@ export class Spinner {
             container.appendChild(title);
 
             body.classList.add('hide');
+            body.appendChild(container);
 
             return container;
+      }
+
+      static remove() {
+            const body = document.querySelector('body');
+            const container = document.querySelector('.spinner-container');
+
+            body.classList.remove('hide');
+
+            container.remove();
       }
 
       static #getSpinnerType(type) {

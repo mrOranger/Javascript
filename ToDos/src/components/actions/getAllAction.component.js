@@ -14,7 +14,7 @@ export class GetAllAction {
       }
 
       #onGetAllTodos() {
-            this.body.appendChild(Spinner.render('normal'));
+            Spinner.render('normal');
             TodoService.getAll()
                   .then((response) => {
                         const { statusCode, data, message, success } = response;
@@ -34,6 +34,7 @@ export class GetAllAction {
                   .catch((error) => {
                         console.error(error);
                         alert(`Opss ... I'm so sorry but there is a problem with the network. Please, try later.`);
-                  });
+                  })
+                  .finally(() => Spinner.remove());
       }
 }
