@@ -1,7 +1,15 @@
 export class Spinner {
       static render(type) {
+            const body = document.querySelector('body');
+
+            const container = document.createElement('div');
+            const title = document.createElement('h1');
             const div = document.createElement('div');
             const span = document.createElement('span');
+
+            container.classList.add('spinner-container');
+
+            title.textContent = 'Loading ...';
 
             div.classList.add(...Spinner.#getSpinnerType(type));
             div.role = 'status';
@@ -11,12 +19,17 @@ export class Spinner {
 
             div.appendChild(span);
 
-            return div;
+            container.appendChild(div);
+            container.appendChild(title);
+
+            body.classList.add('hide');
+
+            return container;
       }
 
       static #getSpinnerType(type) {
             if (type === 'error') {
-                  return ['spinner-border', 'text-danger'];
+                  return ['spinner-border', 'text-danger', 'spinner'];
             }
             return ['spinner-border', 'text-primary'];
       }
