@@ -1,6 +1,7 @@
 import { TodoService } from '../../services/todo.service';
 import { Alert } from '../alerts/alert.component';
 import { Spinner } from '../spinner/spinner.component';
+import { StandardModal } from '../modals/standard-modal.component';
 
 export class GetAllAction {
       constructor(htmlActionButton, body) {
@@ -17,12 +18,15 @@ export class GetAllAction {
             Spinner.render('normal');
             TodoService.getAll()
                   .then((response) => {
+                        Spinner.remove();
                         const { statusCode, data, message, success } = response;
                         if (success && statusCode === 200) {
                               if (data.length === 0) {
                                     Alert.render(`There are no ToDos, please add a new one.`, `info`);
+                              } else {
+                                    const standardModal = new StandardModal('Result', 'This will be the result');
+                                    standardModal.render();
                               }
-                              console.log(data);
                         } else {
                               console.info(message);
                               Alert.render(
@@ -34,7 +38,6 @@ export class GetAllAction {
                   .catch((error) => {
                         console.error(error);
                         alert(`Opss ... I'm so sorry but there is a problem with the network. Please, try later.`);
-                  })
-                  .finally(() => Spinner.remove());
+                  });
       }
 }

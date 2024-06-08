@@ -54,3 +54,10 @@
       top: 50%;
       left: 50%;
 }
+
+.modal-sheet {
+      position: absolute !important;
+      width: 100%;
+      height: fit-content;
+      animation: 1s ease-out 0s 1 expand;
+}
