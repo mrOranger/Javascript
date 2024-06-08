@@ -4,6 +4,7 @@ export class TodoService {
       static #BASIC_PATH = 'https://api.freeapi.app/api/v1';
       static #HEADER = {
             accept: 'application/json',
+            'Content-Type': 'application/json',
       };
 
       static getAll() {

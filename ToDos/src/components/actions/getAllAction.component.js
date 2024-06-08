@@ -1,8 +1,8 @@
 import { TodoService } from '../../services/todo.service';
 import { Alert } from '../alerts/alert.component';
 import { Spinner } from '../spinner/spinner.component';
-import { StandardModal } from '../modals/standard-modal.component';
-import { TodoComponent } from '../todo/todo.component';
+import { TodoListModalComponent } from '../modals/todo-list.modal.component';
+import { TodoListComponent } from '../todo/todo-list.component';
 
 export class GetAllAction {
       constructor(htmlActionButton, body) {
@@ -25,9 +25,9 @@ export class GetAllAction {
                               if (data.length === 0) {
                                     Alert.render(`There are no ToDos, please add a new one.`, `info`);
                               } else {
-                                    const todoList = new TodoComponent(data);
-                                    const standardModal = new StandardModal('Result', todoList);
-                                    standardModal.render();
+                                    const todoList = new TodoListComponent(data);
+                                    const todoListModal = new TodoListModalComponent(todoList.render());
+                                    todoListModal.render();
                               }
                         } else {
                               console.info(message);

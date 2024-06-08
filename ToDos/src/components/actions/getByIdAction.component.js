@@ -1,4 +1,3 @@
-import { TodoService } from '../../services/todo.service';
 import { InputIdModalComponent } from '../modals/input-id-modal.component';
 
 export class GetByIdAction {

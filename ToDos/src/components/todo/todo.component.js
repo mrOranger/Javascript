@@ -8,10 +8,10 @@ export class TodoComponent {
             const span = document.createElement('span');
 
             li.classList.add('list-group-item');
-            li.innerHTML = `${this._todo.title} ${this._todo.description}`;
+            li.innerHTML = `<b>${this._todo.title}</b> (<i>${this._todo.id}</i>)-  ${this._todo.description}`;
 
             const badgeClass = this._todo.isDone ? 'text-bg-primary' : 'text-bg-danger';
-            span.classList.add('badge', badgeClass);
+            span.classList.add('badge', badgeClass, 'p-2', 'm-2');
             span.innerHTML = this._todo.isDone ? 'Completed' : 'To complete';
 
             li.appendChild(span);

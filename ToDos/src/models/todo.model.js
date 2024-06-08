@@ -1,9 +1,9 @@
 export class Todo {
-      constructor({ id, title, description, done, createdAt, updatedAt }) {
-            this._id = id;
+      constructor({ _id, title, description, isComplete, createdAt, updatedAt }) {
+            this._id = _id;
             this._title = title;
             this._description = description;
-            this._done = done;
+            this._done = isComplete;
             this._createdAt = createdAt;
             this._updatedAt = updatedAt;
       }

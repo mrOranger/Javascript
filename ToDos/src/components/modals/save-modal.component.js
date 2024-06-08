@@ -1,14 +1,9 @@
-import { TodoService } from '../../services/todo.service';
-import { Alert } from '../alerts/alert.component';
-import { Spinner } from '../spinner/spinner.component';
-import { TodoListModalComponent } from '../modals/todo-list.modal.component';
-import { TodoListComponent } from '../todo/todo-list.component';
-
-export class InputIdModalComponent {
+export class SaveModalComponent {
       #body = document.querySelector('body');
 
-      constructor(title) {
+      constructor(title, callback) {
             this._title = title;
+            this._callback = callback;
       }
 
       get title() {
@@ -26,7 +21,8 @@ export class InputIdModalComponent {
             const modalHeaderDiv = document.createElement('div');
             const modalBodyDiv = document.createElement('div');
             const modalInputDiv = document.createElement('div');
-            const modalInput = document.createElement('input');
+            this.modalTitleInput = document.createElement('input');
+            this.modalDescriptionInput = document.createElement('input');
             const modalFooterDiv = document.createElement('div');
             const modalTitleH5 = document.createElement('h5');
             const modalCloseButton = document.createElement('button');
@@ -41,33 +37,8 @@ export class InputIdModalComponent {
             modalAddButton.type = 'button';
             modalAddButton.classList.add('btn', 'btn-primary');
             modalAddButton.dataset.dataBsDismiss = 'modal';
-            modalAddButton.innerHTML = 'Get';
-            modalAddButton.addEventListener('click', () => {
-                  this.remove();
-                  const id = modalInput.value;
-                  if (id) {
-                        Spinner.render('normal');
-                        TodoService.getById(id)
-                              .then((response) => {
-                                    Spinner.remove();
-                                    const { statusCode, data, message, success } = response;
-                                    if (success && statusCode === 200) {
-                                          if (data) {
-                                                const todoList = new TodoListComponent([data]);
-                                                const todoListModal = new TodoListModalComponent(todoList.render());
-                                                todoListModal.render();
-                                          }
-                                    } else {
-                                          Alert.render(`There is a network problem, please try later`, `error`);
-                                    }
-                              })
-                              .catch((error) => {
-                                    Spinner.remove();
-                                    console.error(error);
-                                    Alert.render(`There is a network problem, please try later`, `error`);
-                              });
-                  }
-            });
+            modalAddButton.innerHTML = 'Save';
+            modalAddButton.addEventListener('click', this._callback);
 
             modalFooterDiv.classList.add(
                   'modal-footer',
@@ -81,13 +52,19 @@ export class InputIdModalComponent {
             modalFooterDiv.appendChild(modalAddButton);
             modalFooterDiv.appendChild(modalCloseButton);
 
-            modalInput.type = 'text';
-            modalInput.placeholder = 'Id of the modal';
-            modalInput.ariaLabel = 'Id of the modal';
-            modalInput.classList.add('form-control');
+            this.modalTitleInput.type = 'text';
+            this.modalTitleInput.placeholder = 'ToDo title';
+            this.modalTitleInput.ariaLabel = 'Title of the todo';
+            this.modalTitleInput.classList.add('form-control');
+
+            this.modalDescriptionInput.type = 'text';
+            this.modalDescriptionInput.placeholder = 'ToDo description';
+            this.modalDescriptionInput.ariaLabel = 'Description of the todo';
+            this.modalDescriptionInput.classList.add('form-control');
 
             modalInputDiv.classList.add('input-group', 'mb-3');
-            modalInputDiv.appendChild(modalInput);
+            modalInputDiv.appendChild(this.modalTitleInput);
+            modalInputDiv.appendChild(this.modalDescriptionInput);
 
             modalBodyDiv.classList.add('modal-body', 'py-0');
             modalBodyDiv.appendChild(modalInputDiv);
@@ -114,6 +91,14 @@ export class InputIdModalComponent {
 
             this.#body.appendChild(this.modalDiv);
             this.#body.classList.add('hide');
+      }
+
+      get title() {
+            return this.modalTitleInput.value;
+      }
+
+      get description() {
+            return this.modalDescriptionInput.value;
       }
 
       remove() {
