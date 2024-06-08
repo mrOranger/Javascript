@@ -1,6 +1,5 @@
 export class StandardModal {
       #body = document.querySelector('body');
-      #header = document.querySelector('header');
 
       constructor(title, content) {
             this._title = title;

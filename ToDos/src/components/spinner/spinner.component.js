@@ -34,7 +34,9 @@ export class Spinner {
 
             body.classList.remove('hide');
 
-            container.remove();
+            if (container) {
+                  container.remove();
+            }
       }
 
       static #getSpinnerType(type) {
