@@ -37,6 +37,4 @@ export class SaveAction {
             });
             saveModal.render();
       }
-
-      saveModalCallback() {}
 }

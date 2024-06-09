@@ -35,7 +35,7 @@ export class TodoService {
       static update(id, todo) {
             const path = `${this.#BASIC_PATH}/${this.#TODO_RESOURCE_PATH}/${id}`;
             return fetch(path, {
-                  method: 'PATCH',
+                  method: 'PUT',
                   headers: this.#HEADER,
                   body: todo,
             }).then((response) => response.json());
