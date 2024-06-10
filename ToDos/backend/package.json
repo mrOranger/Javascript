@@ -1,30 +1,33 @@
 {
-  "name": "todos-backend",
-  "version": "1.0.0",
-  "description": "Backend for the ToDos final project",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mrOranger/Javascript.git"
-  },
-  "keywords": [
-    "JavaScript",
-    "Node.js",
-    "Express.js",
-    "backend",
-    "REST",
-    "API"
-  ],
-  "author": "mrOranger (Edoardo Oranger)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mrOranger/Javascript/issues"
-  },
-  "homepage": "https://github.com/mrOranger/Javascript#readme",
-  "dependencies": {
-    "express": "^4.19.2"
-  }
+      "name": "todos-backend",
+      "version": "1.0.0",
+      "description": "Backend for the ToDos final project",
+      "type": "module",
+      "main": "index.js",
+      "scripts": {
+            "serve": "node index.js",
+            "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "repository": {
+            "type": "git",
+            "url": "git+https://github.com/mrOranger/Javascript.git"
+      },
+      "keywords": [
+            "JavaScript",
+            "Node.js",
+            "Express.js",
+            "backend",
+            "REST",
+            "API"
+      ],
+      "author": "mrOranger (Edoardo Oranger)",
+      "license": "ISC",
+      "bugs": {
+            "url": "https://github.com/mrOranger/Javascript/issues"
+      },
+      "homepage": "https://github.com/mrOranger/Javascript#readme",
+      "dependencies": {
+            "body-parser": "^1.20.2",
+            "express": "^4.19.2"
+      }
 }
