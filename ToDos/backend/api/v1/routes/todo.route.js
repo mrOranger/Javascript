@@ -1,17 +1,17 @@
 import express from 'express';
-import serviceProvider from '../service.provider';
+import { TodoController } from '../controllers/todo.controller.js';
 
 const router = express.Router();
 
-router.get('/api/v1/todo', serviceProvider.controllers.todo.getAll);
-router.get('api/v1/todo/:id', serviceProvider.controllers.todo.getById);
+router.get('/api/v1/todo', TodoController.getAll);
+router.get('/api/v1/todo/:id', TodoController.getById);
 
-router.post('api/v1/todo', serviceProvider.controllers.todo.save);
+router.post('/api/v1/todo', TodoController.save);
 
-router.put('api/v1/todo/:id', serviceProvider.controllers.todo.update);
+router.put('/api/v1/todo/:id', TodoController.update);
 
-router.patch('api/v1/todo/:id', serviceProvider.controllers.todo.patch);
+router.patch('/api/v1/todo/:id', TodoController.patch);
 
-router.delete('api/v1/todo/:id', serviceProvider.controllers.todo.delete);
+router.delete('/api/v1/todo/:id', TodoController.delete);
 
 export { router };

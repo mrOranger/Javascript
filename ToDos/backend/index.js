@@ -1,11 +1,12 @@
 import express from 'express';
 import bodyParser from 'body-parser';
-import todoServiceProvider from './api/v1/service.provider';
+import { router } from './api/v1/routes/todo.route.js';
+import { CorsMiddleware } from './api/v1/middlewares/cors.middleware.js';
 
 const application = express();
 
 application.use(bodyParser.json());
-application.use(todoServiceProvider.routes);
-application.use(todoServiceProvider.middlewares.cors.apply);
+application.use(CorsMiddleware.apply);
+application.use(router);
 
-application.listen(3000, 'todo.io');
+application.listen(3000);
