@@ -1,4 +1,4 @@
-import { Request, Response, Next } from 'express';
+import { Request, Response } from 'express';
 
 export class CorsMiddleware {
       /**
