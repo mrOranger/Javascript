@@ -9,4 +9,4 @@ application.use(bodyParser.json());
 application.use(CorsMiddleware.apply);
 application.use(router);
 
-application.listen(3000);
+application.listen(8000);
