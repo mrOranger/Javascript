@@ -1,10 +1,19 @@
 import { TodoListComponent } from '../todo/todo-list.component';
 
 export class TodoListModalComponent {
+      #toDoList;
       #body = document.querySelector('body');
 
       constructor(toDoList) {
-            this.toDoList = toDoList;
+            this.#toDoList = toDoList;
+      }
+
+      get todoList() {
+            return this.#toDoList;
+      }
+
+      set todoList(toDoList) {
+            this.#toDoList = toDoList;
       }
 
       render() {
@@ -34,7 +43,7 @@ export class TodoListModalComponent {
             );
             modalFooterDiv.appendChild(modalCloseButton);
 
-            const todoListComponent = new TodoListComponent(this.toDoList);
+            const todoListComponent = new TodoListComponent(this.#toDoList);
             modalBodyDiv.classList.add('modal-body', 'py-0');
             modalBodyDiv.appendChild(todoListComponent.render());
 
