@@ -5,7 +5,7 @@ export class BaseComponent {
             throw new NotImplementedException('Not implemented render() method in BaseComponent');
       }
 
-      delete() {
+      remove() {
             throw new NotImplementedException('Not implemented delete() method in BaseComponent');
       }
 }

@@ -1,4 +1,4 @@
-export class NotImplementeException extends Error {
+export class NotImplementedException extends Error {
       #message;
 
       constructor(message) {

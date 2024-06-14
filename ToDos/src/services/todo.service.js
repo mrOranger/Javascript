@@ -1,7 +1,6 @@
 export class TodoService {
-      static #TODO_RESOURCE_PATH = 'todos';
-      static #TOGGLE_RESOURCE_PATH = 'toggle/status';
-      static #BASIC_PATH = 'https://api.freeapi.app/api/v1';
+      static #TODO_RESOURCE_PATH = 'todo';
+      static #BASIC_PATH = 'http://localhost:8000/api/v1';
       static #HEADER = {
             accept: 'application/json',
             'Content-Type': 'application/json',
@@ -42,7 +41,7 @@ export class TodoService {
       }
 
       static updateStatus(id) {
-            const path = `${this.#BASIC_PATH}/${this.#TODO_RESOURCE_PATH}/${this.#TOGGLE_RESOURCE_PATH}/${id}`;
+            const path = `${this.#BASIC_PATH}/${this.#TODO_RESOURCE_PATH}/${id}`;
             return fetch(path, {
                   method: 'PATCH',
                   headers: this.#HEADER,

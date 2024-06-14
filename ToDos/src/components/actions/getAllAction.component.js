@@ -5,9 +5,12 @@ import { TodoListModalComponent } from '../modals/todo-list.modal.component';
 import { TodoListComponent } from '../todo/todo-list.component';
 
 export class GetAllAction {
+      #spinnerComponent;
+
       constructor(htmlActionButton, body) {
             this.body = body;
             this.htmlActionButton = htmlActionButton;
+            this.#spinnerComponent = new Spinner('info', 'Loading');
             this.#initListener();
       }
 
@@ -16,28 +19,21 @@ export class GetAllAction {
       }
 
       #onGetAllTodos() {
-            Spinner.render('normal');
+            this.#spinnerComponent.render();
             TodoService.getAll()
                   .then((response) => {
-                        Spinner.remove();
-                        const { statusCode, data, message, success } = response;
-                        if (success && statusCode === 200) {
-                              if (data.length === 0) {
-                                    Alert.render(`There are no ToDos, please add a new one.`, `info`);
-                              } else {
-                                    const todoList = new TodoListComponent(data);
-                                    const todoListModal = new TodoListModalComponent(todoList.render());
-                                    todoListModal.render();
-                              }
+                        this.#spinnerComponent.remove();
+                        const { data } = response;
+                        if (data.length === 0) {
+                              Alert.render(`There are no ToDos, please add a new one.`, `info`);
                         } else {
-                              console.info(message);
-                              Alert.render(
-                                    `Opss ... I'm so sorry but there is a problem with the network. Please, try later.`,
-                                    `error`,
-                              );
+                              const todoList = new TodoListComponent(data);
+                              const todoListModal = new TodoListModalComponent(todoList.render());
+                              todoListModal.render();
                         }
                   })
                   .catch((error) => {
+                        this.#spinnerComponent.remove();
                         console.error(error);
                         alert(`Opss ... I'm so sorry but there is a problem with the network. Please, try later.`);
                   });
