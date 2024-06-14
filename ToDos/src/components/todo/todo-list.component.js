@@ -1,18 +1,25 @@
 import { Todo } from '../../models/todo.model';
+import { BaseComponent } from '../base.component';
 import { TodoComponent } from './todo.component';
 
-export class TodoListComponent {
+export class TodoListComponent extends BaseComponent {
+      #unorderedList;
+
       constructor(todos) {
             this._todos = todos;
+            this.#unorderedList = document.createElement('ul');
       }
 
       render() {
-            const ul = document.createElement('ul');
-            ul.classList.add('list-group', 'mt-2', 'mb-2');
+            this.#unorderedList.classList.add('list-group', 'mt-2', 'mb-2');
             for (const todo of this._todos) {
                   const todoComponent = new TodoComponent(new Todo(todo));
-                  ul.appendChild(todoComponent.render());
+                  this.#unorderedList.appendChild(todoComponent.render());
             }
-            return ul;
+            return this.#unorderedList;
+      }
+
+      remove() {
+            this.#unorderedList.remove();
       }
 }
