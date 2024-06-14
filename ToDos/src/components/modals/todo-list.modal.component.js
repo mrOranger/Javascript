@@ -1,3 +1,5 @@
+import { TodoListComponent } from '../todo/todo-list.component';
+
 export class TodoListModalComponent {
       #body = document.querySelector('body');
 
@@ -32,8 +34,9 @@ export class TodoListModalComponent {
             );
             modalFooterDiv.appendChild(modalCloseButton);
 
+            const todoListComponent = new TodoListComponent(this.toDoList);
             modalBodyDiv.classList.add('modal-body', 'py-0');
-            modalBodyDiv.appendChild(this.toDoList);
+            modalBodyDiv.appendChild(todoListComponent.render());
 
             modalTitleH5.classList.add('modal-title', 'fs-5');
             modalTitleH5.innerHTML = 'List of all ToDo';
