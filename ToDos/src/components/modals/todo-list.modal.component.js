@@ -1,10 +1,12 @@
+import { BaseComponent } from '../base.component';
 import { TodoListComponent } from '../todo/todo-list.component';
 
-export class TodoListModalComponent {
+export class TodoListModalComponent extends BaseComponent {
       #toDoList;
       #body = document.querySelector('body');
 
       constructor(toDoList) {
+            super();
             this.#toDoList = toDoList;
       }
 
@@ -43,7 +45,7 @@ export class TodoListModalComponent {
             );
             modalFooterDiv.appendChild(modalCloseButton);
 
-            const todoListComponent = new TodoListComponent(this.#toDoList);
+            const todoListComponent = new TodoListComponent(this.todoList);
             modalBodyDiv.classList.add('modal-body', 'py-0');
             modalBodyDiv.appendChild(todoListComponent.render());
 

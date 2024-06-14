@@ -4,6 +4,7 @@ export class TodoComponent extends BaseComponent {
       #listItem;
 
       constructor(todo) {
+            super();
             this._todo = todo;
             this.#listItem = document.createElement('li');
       }

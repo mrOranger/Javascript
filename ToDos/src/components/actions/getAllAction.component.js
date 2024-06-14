@@ -6,11 +6,13 @@ import { TodoListComponent } from '../todo/todo-list.component';
 
 export class GetAllAction {
       #spinnerComponent;
+      #todoListModalComponent;
 
       constructor(htmlActionButton, body) {
             this.body = body;
             this.htmlActionButton = htmlActionButton;
             this.#spinnerComponent = new Spinner('info', 'Loading');
+            this.#todoListModalComponent = new TodoListModalComponent();
             this.#initListener();
       }
 
@@ -27,9 +29,8 @@ export class GetAllAction {
                         if (data.length === 0) {
                               Alert.render(`There are no ToDos, please add a new one.`, `info`);
                         } else {
-                              const todoList = new TodoListComponent(data);
-                              const todoListModal = new TodoListModalComponent(todoList.render());
-                              todoListModal.render();
+                              this.#todoListModalComponent.todoList = data;
+                              this.#todoListModalComponent.render();
                         }
                   })
                   .catch((error) => {
