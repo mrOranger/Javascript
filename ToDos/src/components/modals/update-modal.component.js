@@ -1,54 +1,116 @@
-export class UpdateModalCmomponent {
-      #body = document.querySelector('body');
+import { TodoService } from '../../services/todo.service';
+import { TodoIdValidator } from '../../validators/todo-id.validator';
+import { TodoTitleValidator } from '../../validators/todo-title.validator';
+import { TodoDescriptionValidator } from '../../validators/todo-description.validator';
+import { AlertFactory } from '../alerts/alert.factory';
+import { BaseComponent } from '../base.component';
 
-      constructor(title, callback) {
-            this._title = title;
-            this._callback = callback;
+export class UpdateModalComponent extends BaseComponent {
+      #title;
+      #validInput;
+      #body = document.querySelector('body');
+      #modalDiv = document.createElement('div');
+      #modalDialogDiv = document.createElement('div');
+      #modalContentDiv = document.createElement('div');
+      #modalHeaderDiv = document.createElement('div');
+      #modalBodyDiv = document.createElement('div');
+      #modalInputDiv = document.createElement('div');
+      #modalIdInput = document.createElement('input');
+      #modalTitleInput = document.createElement('input');
+      #modalDescriptionInput = document.createElement('input');
+      #modalFooterDiv = document.createElement('div');
+      #modalTitleH5 = document.createElement('h5');
+      #modalCloseButton = document.createElement('button');
+      #modalAddButton = document.createElement('button');
+
+      constructor(title) {
+            super();
+            this.#title = title;
+            this.#validInput = {
+                  id: false,
+                  title: false,
+                  description: false,
+            };
       }
 
       get title() {
-            return this._title;
+            return this.#title;
       }
 
       set title(title) {
-            this._title = title;
-      }
-
-      get userInfo() {
-            const todoId = this.modalIdInput.value;
-            const todoTitle = this.modalTitleInput.value;
-            const todoDescription = this.modalDescriptionInput.value;
-            return { id: todoId, title: todoTitle, description: todoDescription };
+            this.#title = title;
       }
 
       render() {
-            this.modalDiv = document.createElement('div');
-            const modalDialogDiv = document.createElement('div');
-            const modalContentDiv = document.createElement('div');
-            const modalHeaderDiv = document.createElement('div');
-            const modalBodyDiv = document.createElement('div');
-            const modalInputDiv = document.createElement('div');
-            this.modalIdInput = document.createElement('input');
-            this.modalTitleInput = document.createElement('input');
-            this.modalDescriptionInput = document.createElement('input');
-            const modalFooterDiv = document.createElement('div');
-            const modalTitleH5 = document.createElement('h5');
-            const modalCloseButton = document.createElement('button');
-            const modalUpdateButton = document.createElement('button');
+            this.#initModal();
 
-            modalCloseButton.type = 'button';
-            modalCloseButton.classList.add('btn', 'btn-secondary');
-            modalCloseButton.dataset.dataBsDismiss = 'modal';
-            modalCloseButton.innerHTML = 'Close';
-            modalCloseButton.addEventListener('click', this.remove.bind(this));
+            this.#modalContentDiv.classList.add('modal-content', 'rounded-4', 'shadow');
+            this.#modalContentDiv.appendChild(this.#modalHeaderDiv);
+            this.#modalContentDiv.appendChild(this.#modalBodyDiv);
+            this.#modalContentDiv.appendChild(this.#modalFooterDiv);
 
-            modalUpdateButton.type = 'button';
-            modalUpdateButton.classList.add('btn', 'btn-primary');
-            modalUpdateButton.dataset.dataBsDismiss = 'modal';
-            modalUpdateButton.innerHTML = 'Update';
-            modalUpdateButton.addEventListener('click', this._callback);
+            this.#modalDialogDiv.classList.add('modal-dialog');
+            this.#modalDialogDiv.role = 'document';
+            this.#modalDialogDiv.appendChild(this.#modalContentDiv);
 
-            modalFooterDiv.classList.add(
+            this.#modalDiv.classList.add('modal', 'modal-sheet', 'position-absolute', 'd-block', 'p-4', 'py-md-5');
+            this.#modalDiv.role = 'dialog';
+            this.#modalDiv.tabIndex = -1;
+            this.#modalDiv.appendChild(this.#modalDialogDiv);
+
+            this.#body.appendChild(this.#modalDiv);
+            this.#body.classList.add('hide');
+      }
+
+      #initModal() {
+            this.#initModalFooter();
+            this.#initModalBody();
+            this.#initModalHeader();
+      }
+
+      #initModalFooterButtons() {
+            this.#modalCloseButton.type = 'button';
+            this.#modalCloseButton.classList.add('btn', 'btn-secondary');
+            this.#modalCloseButton.dataset.dataBsDismiss = 'modal';
+            this.#modalCloseButton.innerHTML = 'Close';
+            this.#modalCloseButton.addEventListener('click', this.#onCancelCallback.bind(this));
+
+            this.#modalAddButton.type = 'button';
+            this.#modalAddButton.classList.add('btn', 'btn-primary');
+            this.#modalAddButton.dataset.dataBsDismiss = 'modal';
+            this.#modalAddButton.innerHTML = 'Save';
+            this.#modalAddButton.addEventListener('click', this.#onConfirmCallback.bind(this));
+            this.#modalAddButton.disabled = true;
+      }
+
+      #onCancelCallback() {
+            this.remove();
+      }
+
+      #onConfirmCallback() {
+            const id = this.#modalIdInput.value;
+            const title = this.#modalTitleInput.value;
+            const description = this.#modalDescriptionInput.value;
+
+            TodoService.update(id, JSON.stringify({ title, description }))
+                  .then((response) => {
+                        this.remove();
+                        const { statusCode, success } = response;
+                        if (success && statusCode === 200) {
+                              AlertFactory.updatedAlert().render();
+                        } else {
+                              AlertFactory.noTodoAlert().render();
+                        }
+                  })
+                  .catch((error) => {
+                        console.log(error);
+                  });
+      }
+
+      #initModalFooter() {
+            this.#initModalFooterButtons();
+
+            this.#modalFooterDiv.classList.add(
                   'modal-footer',
                   'flex-column',
                   'align-items-stretch',
@@ -57,66 +119,96 @@ export class UpdateModalCmomponent {
                   'pb-3',
                   'border-top-3',
             );
-            modalFooterDiv.appendChild(modalUpdateButton);
-            modalFooterDiv.appendChild(modalCloseButton);
-
-            this.modalIdInput.type = 'text';
-            this.modalIdInput.placeholder = 'ToDo id';
-            this.modalIdInput.ariaLabel = 'Id of the todo';
-            this.modalIdInput.classList.add('form-control');
-
-            this.modalTitleInput.type = 'text';
-            this.modalTitleInput.placeholder = 'ToDo title';
-            this.modalTitleInput.ariaLabel = 'Title of the todo';
-            this.modalTitleInput.classList.add('form-control');
-
-            this.modalDescriptionInput.type = 'text';
-            this.modalDescriptionInput.placeholder = 'ToDo description';
-            this.modalDescriptionInput.ariaLabel = 'Description of the todo';
-            this.modalDescriptionInput.classList.add('form-control');
-
-            modalInputDiv.classList.add('input-group', 'mb-3');
-            modalInputDiv.appendChild(this.modalIdInput);
-            modalInputDiv.appendChild(this.modalTitleInput);
-            modalInputDiv.appendChild(this.modalDescriptionInput);
-
-            modalBodyDiv.classList.add('modal-body', 'py-0');
-            modalBodyDiv.appendChild(modalInputDiv);
-
-            modalTitleH5.classList.add('modal-title', 'fs-5');
-            modalTitleH5.innerHTML = this.title;
-
-            modalHeaderDiv.classList.add('modal-header', 'border-bottom-0');
-            modalHeaderDiv.appendChild(modalTitleH5);
-
-            modalContentDiv.classList.add('modal-content', 'rounded-4', 'shadow');
-            modalContentDiv.appendChild(modalHeaderDiv);
-            modalContentDiv.appendChild(modalBodyDiv);
-            modalContentDiv.appendChild(modalFooterDiv);
-
-            modalDialogDiv.classList.add('modal-dialog');
-            modalDialogDiv.role = 'document';
-            modalDialogDiv.appendChild(modalContentDiv);
-
-            this.modalDiv.classList.add('modal', 'modal-sheet', 'position-absolute', 'd-block', 'p-4', 'py-md-5');
-            this.modalDiv.role = 'dialog';
-            this.modalDiv.tabIndex = -1;
-            this.modalDiv.appendChild(modalDialogDiv);
-
-            this.#body.appendChild(this.modalDiv);
-            this.#body.classList.add('hide');
+            this.#modalFooterDiv.appendChild(this.#modalAddButton);
+            this.#modalFooterDiv.appendChild(this.#modalCloseButton);
       }
 
-      get title() {
-            return this.modalTitleInput.value;
+      #initModalBodyInput() {
+            this.#modalIdInput.type = 'text';
+            this.#modalIdInput.placeholder = 'ToDo id';
+            this.#modalIdInput.ariaLabel = 'Id of the todo';
+            this.#modalIdInput.oninput = this.#onIdChange.bind(this);
+            this.#modalIdInput.classList.add('form-control');
+
+            this.#modalTitleInput.type = 'text';
+            this.#modalTitleInput.placeholder = 'ToDo title';
+            this.#modalTitleInput.ariaLabel = 'Title of the todo';
+            this.#modalTitleInput.oninput = this.#onTitleChange.bind(this);
+            this.#modalTitleInput.classList.add('form-control');
+
+            this.#modalDescriptionInput.type = 'text';
+            this.#modalDescriptionInput.placeholder = 'ToDo description';
+            this.#modalDescriptionInput.ariaLabel = 'Description of the todo';
+            this.#modalDescriptionInput.oninput = this.#onDescriptionChange.bind(this);
+            this.#modalDescriptionInput.classList.add('form-control');
       }
 
-      get description() {
-            return this.modalDescriptionInput.value;
+      #onIdChange() {
+            try {
+                  const validator = new TodoIdValidator(this.#modalIdInput.value);
+                  validator.validate();
+                  this.#validInput.id = true;
+            } catch (exception) {
+                  this.#validInput.id = false;
+            } finally {
+                  this.#modalAddButton.disabled = !(
+                        this.#validInput.description &&
+                        this.#validInput.title &&
+                        this.#validInput.id
+                  );
+            }
+      }
+
+      #onTitleChange() {
+            try {
+                  const validator = new TodoTitleValidator(this.#modalTitleInput.value);
+                  validator.validate();
+                  this.#validInput.title = true;
+            } catch (exception) {
+                  this.#validInput.title = false;
+            } finally {
+                  this.#modalAddButton.disabled = !(
+                        this.#validInput.description &&
+                        this.#validInput.title &&
+                        this.#validInput.id
+                  );
+            }
+      }
+
+      #onDescriptionChange() {
+            try {
+                  const validator = new TodoDescriptionValidator(this.#modalDescriptionInput.value);
+                  validator.validate();
+                  this.#validInput.description = true;
+            } catch (exception) {
+                  this.#validInput.description = false;
+            } finally {
+                  this.#modalAddButton.disabled = !(this.#validInput.description && this.#validInput.title);
+            }
+      }
+
+      #initModalBody() {
+            this.#initModalBodyInput();
+
+            this.#modalInputDiv.classList.add('input-group', 'mb-3');
+            this.#modalInputDiv.appendChild(this.#modalIdInput);
+            this.#modalInputDiv.appendChild(this.#modalTitleInput);
+            this.#modalInputDiv.appendChild(this.#modalDescriptionInput);
+
+            this.#modalBodyDiv.classList.add('modal-body', 'py-0');
+            this.#modalBodyDiv.appendChild(this.#modalInputDiv);
+      }
+
+      #initModalHeader() {
+            this.#modalTitleH5.classList.add('modal-title', 'fs-5');
+            this.#modalTitleH5.innerHTML = this.title;
+
+            this.#modalHeaderDiv.classList.add('modal-header', 'border-bottom-0');
+            this.#modalHeaderDiv.appendChild(this.#modalTitleH5);
       }
 
       remove() {
             this.#body.classList.remove('hide');
-            this.modalDiv.remove();
+            this.#modalDiv.remove();
       }
 }
