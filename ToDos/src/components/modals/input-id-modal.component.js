@@ -1,5 +1,6 @@
 import { TodoService } from '../../services/todo.service';
 import { TodoIdValidator } from '../../validators/todo-id.validator';
+import { AlertFactory } from '../alerts/alert.factory';
 import { BaseComponent } from '../base.component';
 
 export class InputIdModalComponent extends BaseComponent {
@@ -136,7 +137,10 @@ export class InputIdModalComponent extends BaseComponent {
                               console.log(data);
                               this.remove.bind(this);
                         })
-                        .catch(console.error);
+                        .catch((error) => {
+                              this.#onModalCloseEvent();
+                              AlertFactory.networkErrorAlert().render();
+                        });
             } else {
                   console.log('Invalid input!');
             }

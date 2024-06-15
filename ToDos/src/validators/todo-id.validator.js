@@ -12,7 +12,7 @@ export class TodoIdValidator extends BaseValidator {
       validate() {
             console.log(this.#id);
             const parsedId = Number.parseInt(this.#id);
-            if (isNaN(parsedId) || parsedId <= 0) {
+            if (isNaN(parsedId) || parsedId < 0) {
                   throw new InvalidInputException('Not a valid number as id!');
             }
       }

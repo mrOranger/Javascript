@@ -1,8 +1,7 @@
 import { TodoService } from '../../services/todo.service';
-import { Alert } from '../alerts/alert.component';
+import { AlertFactory } from '../alerts/alert.factory';
 import { Spinner } from '../spinner/spinner.component';
 import { TodoListModalComponent } from '../modals/todo-list.modal.component';
-import { TodoListComponent } from '../todo/todo-list.component';
 
 export class GetAllAction {
       #spinnerComponent;
@@ -27,7 +26,7 @@ export class GetAllAction {
                         this.#spinnerComponent.remove();
                         const { data } = response;
                         if (data.length === 0) {
-                              Alert.render(`There are no ToDos, please add a new one.`, `info`);
+                              AlertFactory.noDataAlert().render();
                         } else {
                               this.#todoListModalComponent.todoList = data;
                               this.#todoListModalComponent.render();
@@ -36,7 +35,7 @@ export class GetAllAction {
                   .catch((error) => {
                         this.#spinnerComponent.remove();
                         console.error(error);
-                        alert(`Opss ... I'm so sorry but there is a problem with the network. Please, try later.`);
+                        AlertFactory.networkErrorAlert().render();
                   });
       }
 }
