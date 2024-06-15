@@ -38,7 +38,6 @@ export class Database {
             this.data.splice(todoIndex, 1, {
                   id,
                   ...todoToUpdate,
-                  completed: true,
                   createdAt: new Date().toLocaleTimeString(),
                   updatedAt: new Date().toLocaleTimeString(),
             });
