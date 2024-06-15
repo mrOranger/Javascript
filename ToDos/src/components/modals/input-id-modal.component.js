@@ -1,75 +1,101 @@
 import { TodoService } from '../../services/todo.service';
-import { Alert } from '../alerts/alert.component';
-import { Spinner } from '../spinner/spinner.component';
-import { TodoListModalComponent } from '../modals/todo-list.modal.component';
-import { TodoListComponent } from '../todo/todo-list.component';
+import { TodoIdValidator } from '../../validators/todo-id.validator';
+import { BaseComponent } from '../base.component';
 
-export class InputIdModalComponent {
+export class InputIdModalComponent extends BaseComponent {
+      #title;
       #body = document.querySelector('body');
+      #modalDiv = document.createElement('div');
+      #modalDialogDiv = document.createElement('div');
+      #modalContentDiv = document.createElement('div');
+      #modalHeaderDiv = document.createElement('div');
+      #modalBodyDiv = document.createElement('div');
+      #modalInputDiv = document.createElement('div');
+      #modalInput = document.createElement('input');
+      #modalFooterDiv = document.createElement('div');
+      #modalTitleH5 = document.createElement('h5');
+      #modalAddButton = document.createElement('button');
+      #modalCloseButton = document.createElement('button');
 
       constructor(title) {
-            this._title = title;
+            super();
+            this.#title = title;
       }
 
       get title() {
-            return this._title;
+            return this.#title;
       }
 
       set title(title) {
-            this._title = title;
+            this.#title = title;
       }
 
       render() {
-            this.modalDiv = document.createElement('div');
-            const modalDialogDiv = document.createElement('div');
-            const modalContentDiv = document.createElement('div');
-            const modalHeaderDiv = document.createElement('div');
-            const modalBodyDiv = document.createElement('div');
-            const modalInputDiv = document.createElement('div');
-            const modalInput = document.createElement('input');
-            const modalFooterDiv = document.createElement('div');
-            const modalTitleH5 = document.createElement('h5');
-            const modalCloseButton = document.createElement('button');
-            const modalAddButton = document.createElement('button');
+            this.#initModalDialog();
+      }
 
-            modalCloseButton.type = 'button';
-            modalCloseButton.classList.add('btn', 'btn-secondary');
-            modalCloseButton.dataset.dataBsDismiss = 'modal';
-            modalCloseButton.innerHTML = 'Close';
-            modalCloseButton.addEventListener('click', this.remove.bind(this));
+      #initModalDialog() {
+            this.#initModalFooter();
+            this.#initModalBody();
+            this.#initModalHeader();
 
-            modalAddButton.type = 'button';
-            modalAddButton.classList.add('btn', 'btn-primary');
-            modalAddButton.dataset.dataBsDismiss = 'modal';
-            modalAddButton.innerHTML = 'Get';
-            modalAddButton.addEventListener('click', () => {
-                  this.remove();
-                  const id = modalInput.value;
-                  if (id) {
-                        Spinner.render('normal');
-                        TodoService.getById(id)
-                              .then((response) => {
-                                    Spinner.remove();
-                                    const { statusCode, data, message, success } = response;
-                                    if (success && statusCode === 200) {
-                                          if (data) {
-                                                const todoList = new TodoListComponent([data]);
-                                                const todoListModal = new TodoListModalComponent(todoList.render());
-                                                todoListModal.render();
-                                          }
-                                    } else {
-                                          Alert.render(`There is a network problem, please try later`, `error`);
-                                    }
-                              })
-                              .catch((error) => {
-                                    Spinner.remove();
-                                    console.error(error);
-                                    Alert.render(`There is a network problem, please try later`, `error`);
-                              });
-                  }
-            });
+            this.#modalContentDiv.classList.add('modal-content', 'rounded-4', 'shadow');
+            this.#modalContentDiv.appendChild(this.#modalHeaderDiv);
+            this.#modalContentDiv.appendChild(this.#modalBodyDiv);
+            this.#modalContentDiv.appendChild(this.#modalFooterDiv);
 
-            modalFooterDiv.classList.add(
+            this.#modalDialogDiv.classList.add('modal-dialog');
+            this.#modalDialogDiv.role = 'document';
+            this.#modalDialogDiv.appendChild(this.#modalContentDiv);
+
+            this.#modalDiv.classList.add('modal', 'modal-sheet', 'position-absolute', 'd-block', 'p-4', 'py-md-5');
+            this.#modalDiv.role = 'dialog';
+            this.#modalDiv.tabIndex = -1;
+            this.#modalDiv.appendChild(this.#modalDialogDiv);
+
+            this.#body.appendChild(this.#modalDiv);
+            this.#body.classList.add('hide');
+      }
+
+      #initModalHeader() {
+            this.#modalTitleH5.classList.add('modal-title', 'fs-5');
+            this.#modalTitleH5.innerHTML = this.title;
+
+            this.#modalHeaderDiv.classList.add('modal-header', 'border-bottom-0');
+            this.#modalHeaderDiv.appendChild(this.#modalTitleH5);
+      }
+
+      #initModalBodyInput() {
+            this.#modalInput.type = 'text';
+            this.#modalInput.placeholder = 'Id of the modal';
+            this.#modalInput.ariaLabel = 'Id of the modal';
+            this.#modalInput.min = 0;
+            this.#modalInput.step = 1;
+            this.#modalInput.oninput = this.#onInputChangeEvent.bind(this);
+            this.#modalInput.classList.add('form-control');
+
+            this.#modalInputDiv.classList.add('input-group', 'mb-3');
+            this.#modalInputDiv.appendChild(this.#modalInput);
+      }
+
+      #onInputChangeEvent() {
+            try {
+                  const validator = new TodoIdValidator(this.#modalInput.value);
+                  validator.validate();
+                  this.#modalAddButton.disabled = false;
+            } catch (exception) {
+                  this.#modalAddButton.disabled = true;
+            }
+      }
+      #initModalBody() {
+            this.#initModalBodyInput();
+            this.#modalBodyDiv.classList.add('modal-body', 'py-0');
+            this.#modalBodyDiv.appendChild(this.#modalInputDiv);
+      }
+
+      #initModalFooter() {
+            this.#initModalFooterButtons();
+            this.#modalFooterDiv.classList.add(
                   'modal-footer',
                   'flex-column',
                   'align-items-stretch',
@@ -78,46 +104,46 @@ export class InputIdModalComponent {
                   'pb-3',
                   'border-top-3',
             );
-            modalFooterDiv.appendChild(modalAddButton);
-            modalFooterDiv.appendChild(modalCloseButton);
+            this.#modalFooterDiv.appendChild(this.#modalAddButton);
+            this.#modalFooterDiv.appendChild(this.#modalCloseButton);
+      }
 
-            modalInput.type = 'text';
-            modalInput.placeholder = 'Id of the modal';
-            modalInput.ariaLabel = 'Id of the modal';
-            modalInput.classList.add('form-control');
+      #initModalFooterButtons() {
+            this.#modalCloseButton.type = 'button';
+            this.#modalCloseButton.classList.add('btn', 'btn-secondary');
+            this.#modalCloseButton.dataset.dataBsDismiss = 'modal';
+            this.#modalCloseButton.innerHTML = 'Close';
+            this.#modalCloseButton.addEventListener('click', this.#onModalCloseEvent.bind(this));
 
-            modalInputDiv.classList.add('input-group', 'mb-3');
-            modalInputDiv.appendChild(modalInput);
+            this.#modalAddButton.type = 'button';
+            this.#modalAddButton.classList.add('btn', 'btn-primary');
+            this.#modalAddButton.dataset.dataBsDismiss = 'modal';
+            this.#modalAddButton.innerHTML = 'Get';
+            this.#modalAddButton.disabled = true;
+            this.#modalAddButton.addEventListener('click', this.#onModalAddEvent.bind(this));
+      }
 
-            modalBodyDiv.classList.add('modal-body', 'py-0');
-            modalBodyDiv.appendChild(modalInputDiv);
+      #onModalCloseEvent() {
+            this.remove();
+      }
 
-            modalTitleH5.classList.add('modal-title', 'fs-5');
-            modalTitleH5.innerHTML = this.title;
-
-            modalHeaderDiv.classList.add('modal-header', 'border-bottom-0');
-            modalHeaderDiv.appendChild(modalTitleH5);
-
-            modalContentDiv.classList.add('modal-content', 'rounded-4', 'shadow');
-            modalContentDiv.appendChild(modalHeaderDiv);
-            modalContentDiv.appendChild(modalBodyDiv);
-            modalContentDiv.appendChild(modalFooterDiv);
-
-            modalDialogDiv.classList.add('modal-dialog');
-            modalDialogDiv.role = 'document';
-            modalDialogDiv.appendChild(modalContentDiv);
-
-            this.modalDiv.classList.add('modal', 'modal-sheet', 'position-absolute', 'd-block', 'p-4', 'py-md-5');
-            this.modalDiv.role = 'dialog';
-            this.modalDiv.tabIndex = -1;
-            this.modalDiv.appendChild(modalDialogDiv);
-
-            this.#body.appendChild(this.modalDiv);
-            this.#body.classList.add('hide');
+      #onModalAddEvent() {
+            const todoId = +this.#modalInput.value;
+            if (todoId) {
+                  TodoService.getById(todoId)
+                        .then((response) => {
+                              const { data } = response;
+                              console.log(data);
+                              this.remove.bind(this);
+                        })
+                        .catch(console.error);
+            } else {
+                  console.log('Invalid input!');
+            }
       }
 
       remove() {
             this.#body.classList.remove('hide');
-            this.modalDiv.remove();
+            this.#modalDiv.remove();
       }
 }

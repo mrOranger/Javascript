@@ -5,11 +5,14 @@ export class TodoIdValidator extends BaseValidator {
       #id;
 
       constructor(id) {
+            super();
             this.#id = id;
       }
 
       validate() {
-            if (Number.parseInt(this.#id) == NaN) {
+            console.log(this.#id);
+            const parsedId = Number.parseInt(this.#id);
+            if (isNaN(parsedId) || parsedId <= 0) {
                   throw new InvalidInputException('Not a valid number as id!');
             }
       }
