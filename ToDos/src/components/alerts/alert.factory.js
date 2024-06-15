@@ -12,4 +12,20 @@ export class AlertFactory {
       static networkErrorAlert() {
             return new AlertComponent('There should be an error network, please try later.', 'error');
       }
+
+      static cannotCreateResourceAlert() {
+            return new AlertComponent('We canot create the alert, you have exceeded you maximum size.', 'error');
+      }
+
+      static createdAlert() {
+            return new AlertComponent('Todo created successfully!', 'success');
+      }
+
+      static updatedAlert() {
+            return new AlertComponent('Todo updated successfully!', 'success');
+      }
+
+      static deletedAlert() {
+            return new AlertComponent('Todo deleted successfully!', 'success');
+      }
 }
