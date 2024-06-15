@@ -1,7 +1,6 @@
 import { UpdateModalCmomponent } from '../modals/update-modal.component';
 import { TodoService } from '../../services/todo.service';
 import { Spinner } from '../spinner/spinner.component';
-import { Alert } from '../alerts/alert.component';
 
 export class UpdateAction {
       constructor(htmlActioButton) {

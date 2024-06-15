@@ -2,9 +2,11 @@ import { TodoService } from '../../services/todo.service';
 import { TodoIdValidator } from '../../validators/todo-id.validator';
 import { AlertFactory } from '../alerts/alert.factory';
 import { BaseComponent } from '../base.component';
+import { TodoListModalComponent } from './todo-list.modal.component';
 
 export class InputIdModalComponent extends BaseComponent {
       #title;
+      #todoListModalComponent;
       #body = document.querySelector('body');
       #modalDiv = document.createElement('div');
       #modalDialogDiv = document.createElement('div');
@@ -21,6 +23,7 @@ export class InputIdModalComponent extends BaseComponent {
       constructor(title) {
             super();
             this.#title = title;
+            this.#todoListModalComponent = new TodoListModalComponent();
       }
 
       get title() {
@@ -129,21 +132,23 @@ export class InputIdModalComponent extends BaseComponent {
       }
 
       #onModalAddEvent() {
-            const todoId = +this.#modalInput.value;
-            if (todoId) {
-                  TodoService.getById(todoId)
-                        .then((response) => {
+            TodoService.getById(this.#modalInput.value)
+                  .then((response) => {
+                        if (!response.statusCode) {
                               const { data } = response;
-                              console.log(data);
-                              this.remove.bind(this);
-                        })
-                        .catch((error) => {
+                              this.remove.apply(this);
+                              this.#todoListModalComponent.todoList = [data];
+                              this.#todoListModalComponent.render();
+                        } else {
                               this.#onModalCloseEvent();
-                              AlertFactory.networkErrorAlert().render();
-                        });
-            } else {
-                  console.log('Invalid input!');
-            }
+                              AlertFactory.noTodoAlert().render();
+                        }
+                  })
+                  .catch((error) => {
+                        console.log(error);
+                        this.#onModalCloseEvent();
+                        AlertFactory.networkErrorAlert().render();
+                  });
       }
 
       remove() {

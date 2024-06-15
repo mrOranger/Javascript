@@ -1,5 +1,4 @@
 import { TodoService } from '../../services/todo.service';
-import { Alert } from '../alerts/alert.component';
 import { SaveModalComponent } from '../modals/save-modal.component';
 import { Spinner } from '../spinner/spinner.component';
 
