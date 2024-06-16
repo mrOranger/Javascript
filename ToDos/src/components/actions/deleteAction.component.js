@@ -1,6 +1,4 @@
 import { DeleteModalComponent } from '../modals/delete-modal.component';
-import { TodoService } from '../../services/todo.service';
-import { Spinner } from '../spinner/spinner.component';
 
 export class DeleteAction {
       constructor(htmlActioButton) {

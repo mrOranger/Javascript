@@ -1,6 +1,4 @@
-import { TodoService } from '../../services/todo.service';
 import { SaveModalComponent } from '../modals/save-modal.component';
-import { Spinner } from '../spinner/spinner.component';
 
 export class SaveAction {
       constructor(htmlActioButton) {
