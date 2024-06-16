@@ -17,6 +17,10 @@ export class AlertFactory {
             return new AlertComponent('We canot create the alert, you have exceeded you maximum size.', 'error');
       }
 
+      static resourceConflictAlert() {
+            return new AlertComponent('You cannot mark as completed an already completed todo!', 'error');
+      }
+
       static createdAlert() {
             return new AlertComponent('Todo created successfully!', 'success');
       }
