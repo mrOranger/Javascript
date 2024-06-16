@@ -45,24 +45,35 @@ export class UpdateModalComponent extends BaseComponent {
       }
 
       render() {
-            this.#initModal();
+            const semaphore = sessionStorage.getItem('semaphore');
+            if (semaphore === 'true') {
+                  sessionStorage.setItem('semaphore', false);
+                  this.#initModal();
 
-            this.#modalContentDiv.classList.add('modal-content', 'rounded-4', 'shadow');
-            this.#modalContentDiv.appendChild(this.#modalHeaderDiv);
-            this.#modalContentDiv.appendChild(this.#modalBodyDiv);
-            this.#modalContentDiv.appendChild(this.#modalFooterDiv);
+                  this.#modalContentDiv.classList.add('modal-content', 'rounded-4', 'shadow');
+                  this.#modalContentDiv.appendChild(this.#modalHeaderDiv);
+                  this.#modalContentDiv.appendChild(this.#modalBodyDiv);
+                  this.#modalContentDiv.appendChild(this.#modalFooterDiv);
 
-            this.#modalDialogDiv.classList.add('modal-dialog');
-            this.#modalDialogDiv.role = 'document';
-            this.#modalDialogDiv.appendChild(this.#modalContentDiv);
+                  this.#modalDialogDiv.classList.add('modal-dialog');
+                  this.#modalDialogDiv.role = 'document';
+                  this.#modalDialogDiv.appendChild(this.#modalContentDiv);
 
-            this.#modalDiv.classList.add('modal', 'modal-sheet', 'position-absolute', 'd-block', 'p-4', 'py-md-5');
-            this.#modalDiv.role = 'dialog';
-            this.#modalDiv.tabIndex = -1;
-            this.#modalDiv.appendChild(this.#modalDialogDiv);
+                  this.#modalDiv.classList.add(
+                        'modal',
+                        'modal-sheet',
+                        'position-absolute',
+                        'd-block',
+                        'p-4',
+                        'py-md-5',
+                  );
+                  this.#modalDiv.role = 'dialog';
+                  this.#modalDiv.tabIndex = -1;
+                  this.#modalDiv.appendChild(this.#modalDialogDiv);
 
-            this.#body.appendChild(this.#modalDiv);
-            this.#body.classList.add('hide');
+                  this.#body.appendChild(this.#modalDiv);
+                  this.#body.classList.add('hide');
+            }
       }
 
       #initModal() {
@@ -216,6 +227,7 @@ export class UpdateModalComponent extends BaseComponent {
       }
 
       remove() {
+            sessionStorage.setItem('semaphore', true);
             this.#body.classList.remove('hide');
             this.#modalDiv.remove();
       }

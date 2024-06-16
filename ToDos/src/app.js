@@ -5,6 +5,8 @@ import { UpdateAction } from './components/actions/updateAction.component';
 import { PatchStateAction } from './components/actions/patchStateAction.component';
 import { DeleteAction } from './components/actions/deleteAction.component';
 
+sessionStorage.setItem('semaphore', true);
+
 const body = document.querySelector('body');
 const header = document.querySelector('#header');
 

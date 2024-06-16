@@ -35,7 +35,11 @@ export class PatchModalComponent extends BaseComponent {
       }
 
       render() {
-            this.#initModalDialog();
+            const semaphore = sessionStorage.getItem('semaphore');
+            if (semaphore === 'true') {
+                  sessionStorage.setItem('semaphore', false);
+                  this.#initModalDialog();
+            }
       }
 
       #initModalDialog() {
@@ -160,6 +164,7 @@ export class PatchModalComponent extends BaseComponent {
       }
 
       remove() {
+            sessionStorage.setItem('semaphore', true);
             this.#body.classList.remove('hide');
             this.#modalDiv.remove();
       }
