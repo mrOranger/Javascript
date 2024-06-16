@@ -1,4 +1,5 @@
 {
+      "apc.font.family": "PT Mono",
       "editor.codeLens": true,
       "editor.cursorBlinking": "smooth",
       "editor.cursorStyle": "block",
