@@ -1,49 +1,102 @@
-export class DeleteModalComponent {
-      #body = document.querySelector('body');
+import { TodoService } from '../../services/todo.service';
+import { TodoIdValidator } from '../../validators/todo-id.validator';
+import { AlertFactory } from '../alerts/alert.factory';
+import { BaseComponent } from '../base.component';
 
-      constructor(title, callback) {
-            this._title = title;
-            this._callback = callback;
+export class DeleteModalComponent extends BaseComponent {
+      #title;
+      #body = document.querySelector('body');
+      #modalDiv = document.createElement('div');
+      #modalDialogDiv = document.createElement('div');
+      #modalContentDiv = document.createElement('div');
+      #modalHeaderDiv = document.createElement('div');
+      #modalBodyDiv = document.createElement('div');
+      #modalInputDiv = document.createElement('div');
+      #modalInput = document.createElement('input');
+      #modalFooterDiv = document.createElement('div');
+      #modalTitleH5 = document.createElement('h5');
+      #modalAddButton = document.createElement('button');
+      #modalCloseButton = document.createElement('button');
+
+      constructor(title) {
+            super();
+            this.#title = title;
       }
 
       get title() {
-            return this._title;
+            return this.#title;
       }
 
       set title(title) {
-            this._title = title;
-      }
-
-      get id() {
-            return this.modalIdInput.value;
+            this.#title = title;
       }
 
       render() {
-            this.modalDiv = document.createElement('div');
-            const modalDialogDiv = document.createElement('div');
-            const modalContentDiv = document.createElement('div');
-            const modalHeaderDiv = document.createElement('div');
-            const modalBodyDiv = document.createElement('div');
-            const modalInputDiv = document.createElement('div');
-            this.modalIdInput = document.createElement('input');
-            const modalFooterDiv = document.createElement('div');
-            const modalTitleH5 = document.createElement('h5');
-            const modalCloseButton = document.createElement('button');
-            const modalUpdateButton = document.createElement('button');
+            this.#initModalDialog();
+      }
 
-            modalCloseButton.type = 'button';
-            modalCloseButton.classList.add('btn', 'btn-secondary');
-            modalCloseButton.dataset.dataBsDismiss = 'modal';
-            modalCloseButton.innerHTML = 'Close';
-            modalCloseButton.addEventListener('click', this.remove.bind(this));
+      #initModalDialog() {
+            this.#initModalFooter();
+            this.#initModalBody();
+            this.#initModalHeader();
 
-            modalUpdateButton.type = 'button';
-            modalUpdateButton.classList.add('btn', 'btn-primary');
-            modalUpdateButton.dataset.dataBsDismiss = 'modal';
-            modalUpdateButton.innerHTML = 'Update';
-            modalUpdateButton.addEventListener('click', this._callback);
+            this.#modalContentDiv.classList.add('modal-content', 'rounded-4', 'shadow');
+            this.#modalContentDiv.appendChild(this.#modalHeaderDiv);
+            this.#modalContentDiv.appendChild(this.#modalBodyDiv);
+            this.#modalContentDiv.appendChild(this.#modalFooterDiv);
 
-            modalFooterDiv.classList.add(
+            this.#modalDialogDiv.classList.add('modal-dialog');
+            this.#modalDialogDiv.role = 'document';
+            this.#modalDialogDiv.appendChild(this.#modalContentDiv);
+
+            this.#modalDiv.classList.add('modal', 'modal-sheet', 'position-absolute', 'd-block', 'p-4', 'py-md-5');
+            this.#modalDiv.role = 'dialog';
+            this.#modalDiv.tabIndex = -1;
+            this.#modalDiv.appendChild(this.#modalDialogDiv);
+
+            this.#body.appendChild(this.#modalDiv);
+            this.#body.classList.add('hide');
+      }
+
+      #initModalHeader() {
+            this.#modalTitleH5.classList.add('modal-title', 'fs-5');
+            this.#modalTitleH5.innerHTML = this.title;
+
+            this.#modalHeaderDiv.classList.add('modal-header', 'border-bottom-0');
+            this.#modalHeaderDiv.appendChild(this.#modalTitleH5);
+      }
+
+      #initModalBodyInput() {
+            this.#modalInput.type = 'text';
+            this.#modalInput.placeholder = 'Id of the modal';
+            this.#modalInput.ariaLabel = 'Id of the modal';
+            this.#modalInput.min = 0;
+            this.#modalInput.step = 1;
+            this.#modalInput.oninput = this.#onInputChangeEvent.bind(this);
+            this.#modalInput.classList.add('form-control');
+
+            this.#modalInputDiv.classList.add('input-group', 'mb-3');
+            this.#modalInputDiv.appendChild(this.#modalInput);
+      }
+
+      #onInputChangeEvent() {
+            try {
+                  const validator = new TodoIdValidator(this.#modalInput.value);
+                  validator.validate();
+                  this.#modalAddButton.disabled = false;
+            } catch (exception) {
+                  this.#modalAddButton.disabled = true;
+            }
+      }
+      #initModalBody() {
+            this.#initModalBodyInput();
+            this.#modalBodyDiv.classList.add('modal-body', 'py-0');
+            this.#modalBodyDiv.appendChild(this.#modalInputDiv);
+      }
+
+      #initModalFooter() {
+            this.#initModalFooterButtons();
+            this.#modalFooterDiv.classList.add(
                   'modal-footer',
                   'flex-column',
                   'align-items-stretch',
@@ -52,46 +105,53 @@ export class DeleteModalComponent {
                   'pb-3',
                   'border-top-3',
             );
-            modalFooterDiv.appendChild(modalUpdateButton);
-            modalFooterDiv.appendChild(modalCloseButton);
+            this.#modalFooterDiv.appendChild(this.#modalAddButton);
+            this.#modalFooterDiv.appendChild(this.#modalCloseButton);
+      }
 
-            this.modalIdInput.type = 'text';
-            this.modalIdInput.placeholder = 'ToDo id';
-            this.modalIdInput.ariaLabel = 'Id of the todo';
-            this.modalIdInput.classList.add('form-control');
+      #initModalFooterButtons() {
+            this.#modalCloseButton.type = 'button';
+            this.#modalCloseButton.classList.add('btn', 'btn-secondary');
+            this.#modalCloseButton.dataset.dataBsDismiss = 'modal';
+            this.#modalCloseButton.innerHTML = 'Close';
+            this.#modalCloseButton.addEventListener('click', this.#onModalCloseEvent.bind(this));
 
-            modalInputDiv.classList.add('input-group', 'mb-3');
-            modalInputDiv.appendChild(this.modalIdInput);
+            this.#modalAddButton.type = 'button';
+            this.#modalAddButton.classList.add('btn', 'btn-primary');
+            this.#modalAddButton.dataset.dataBsDismiss = 'modal';
+            this.#modalAddButton.innerHTML = 'Delete';
+            this.#modalAddButton.disabled = true;
+            this.#modalAddButton.addEventListener('click', this.#onModalAddEvent.bind(this));
+      }
 
-            modalBodyDiv.classList.add('modal-body', 'py-0');
-            modalBodyDiv.appendChild(modalInputDiv);
+      #onModalCloseEvent() {
+            this.remove();
+      }
 
-            modalTitleH5.classList.add('modal-title', 'fs-5');
-            modalTitleH5.innerHTML = this.title;
-
-            modalHeaderDiv.classList.add('modal-header', 'border-bottom-0');
-            modalHeaderDiv.appendChild(modalTitleH5);
-
-            modalContentDiv.classList.add('modal-content', 'rounded-4', 'shadow');
-            modalContentDiv.appendChild(modalHeaderDiv);
-            modalContentDiv.appendChild(modalBodyDiv);
-            modalContentDiv.appendChild(modalFooterDiv);
-
-            modalDialogDiv.classList.add('modal-dialog');
-            modalDialogDiv.role = 'document';
-            modalDialogDiv.appendChild(modalContentDiv);
-
-            this.modalDiv.classList.add('modal', 'modal-sheet', 'position-absolute', 'd-block', 'p-4', 'py-md-5');
-            this.modalDiv.role = 'dialog';
-            this.modalDiv.tabIndex = -1;
-            this.modalDiv.appendChild(modalDialogDiv);
-
-            this.#body.appendChild(this.modalDiv);
-            this.#body.classList.add('hide');
+      #onModalAddEvent() {
+            TodoService.delete(this.#modalInput.value)
+                  .then((response) => {
+                        const { statusCode, success } = response;
+                        this.remove.apply(this);
+                        if (success) {
+                              if (statusCode == 200) {
+                                    AlertFactory.deletedAlert().render();
+                              }
+                        } else {
+                              if (statusCode == 404) {
+                                    AlertFactory.noTodoAlert().render();
+                              }
+                        }
+                  })
+                  .catch((error) => {
+                        console.log(error);
+                        this.#onModalCloseEvent();
+                        AlertFactory.networkErrorAlert().render();
+                  });
       }
 
       remove() {
             this.#body.classList.remove('hide');
-            this.modalDiv.remove();
+            this.#modalDiv.remove();
       }
 }
