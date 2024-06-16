@@ -2,7 +2,6 @@ import { TodoService } from '../../services/todo.service';
 import { TodoIdValidator } from '../../validators/todo-id.validator';
 import { AlertFactory } from '../alerts/alert.factory';
 import { BaseComponent } from '../base.component';
-import { TodoListModalComponent } from './todo-list.modal.component';
 
 export class PatchModalComponent extends BaseComponent {
       #title;
