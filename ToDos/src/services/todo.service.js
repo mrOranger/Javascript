@@ -49,7 +49,7 @@ export class TodoService {
       }
 
       static delete(id) {
-            const path = `${this.#BASIC_PATH}/${id}`;
+            const path = `${this.#BASIC_PATH}/${this.#TODO_RESOURCE_PATH}/${id}`;
             return fetch(path, {
                   method: 'DELETE',
                   headers: this.#HEADER,
