@@ -2,9 +2,11 @@ import { TodoService } from '../../services/todo.service';
 import { TodoIdValidator } from '../../validators/todo-id.validator';
 import { AlertFactory } from '../alerts/alert.factory';
 import { BaseComponent } from '../base.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 export class PatchModalComponent extends BaseComponent {
       #title;
+      #loadingSpinner;
       #body = document.querySelector('body');
       #modalDiv = document.createElement('div');
       #modalDialogDiv = document.createElement('div');
@@ -21,6 +23,7 @@ export class PatchModalComponent extends BaseComponent {
       constructor(title) {
             super();
             this.#title = title;
+            this.#loadingSpinner = new SpinnerComponent('info', 'Updating todo ...');
       }
 
       get title() {
@@ -129,8 +132,10 @@ export class PatchModalComponent extends BaseComponent {
       }
 
       #onModalAddEvent() {
+            this.#loadingSpinner = new SpinnerComponent('info', 'Updating todo status ...');
             TodoService.updateStatus(this.#modalInput.value)
                   .then((response) => {
+                        this.#loadingSpinner.remove();
                         const { statusCode, success } = response;
                         this.remove.apply(this);
                         if (success) {
@@ -147,6 +152,7 @@ export class PatchModalComponent extends BaseComponent {
                         }
                   })
                   .catch((error) => {
+                        this.#loadingSpinner.remove();
                         console.log(error);
                         this.#onModalCloseEvent();
                         AlertFactory.networkErrorAlert().render();

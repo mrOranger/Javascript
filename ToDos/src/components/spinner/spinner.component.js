@@ -1,6 +1,6 @@
 import { BaseComponent } from '../base.component';
 
-export class Spinner extends BaseComponent {
+export class SpinnerComponent extends BaseComponent {
       #container;
       #title;
       #div;

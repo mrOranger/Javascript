@@ -3,10 +3,12 @@ import { TodoIdValidator } from '../../validators/todo-id.validator';
 import { AlertFactory } from '../alerts/alert.factory';
 import { BaseComponent } from '../base.component';
 import { TodoListModalComponent } from './todo-list.modal.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 export class InputIdModalComponent extends BaseComponent {
       #title;
       #todoListModalComponent;
+      #loadingSpinner;
       #body = document.querySelector('body');
       #modalDiv = document.createElement('div');
       #modalDialogDiv = document.createElement('div');
@@ -24,6 +26,7 @@ export class InputIdModalComponent extends BaseComponent {
             super();
             this.#title = title;
             this.#todoListModalComponent = new TodoListModalComponent();
+            this.#loadingSpinner = new SpinnerComponent('info', 'Loading ...');
       }
 
       get title() {
@@ -132,21 +135,23 @@ export class InputIdModalComponent extends BaseComponent {
       }
 
       #onModalAddEvent() {
+            this.#loadingSpinner.render();
             TodoService.getById(this.#modalInput.value)
                   .then((response) => {
+                        this.#loadingSpinner.remove();
+                        this.remove.apply(this);
                         if (!response.statusCode) {
                               const { data } = response;
-                              this.remove.apply(this);
                               this.#todoListModalComponent.todoList = [data];
                               this.#todoListModalComponent.render();
                         } else {
-                              this.#onModalCloseEvent();
                               AlertFactory.noTodoAlert().render();
                         }
                   })
                   .catch((error) => {
                         console.log(error);
-                        this.#onModalCloseEvent();
+                        this.#loadingSpinner.remove();
+                        this.remove.apply(this);
                         AlertFactory.networkErrorAlert().render();
                   });
       }

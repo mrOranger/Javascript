@@ -1,6 +1,6 @@
 import { TodoService } from '../../services/todo.service';
 import { AlertFactory } from '../alerts/alert.factory';
-import { Spinner } from '../spinner/spinner.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 import { TodoListModalComponent } from '../modals/todo-list.modal.component';
 
 export class GetAllAction {
@@ -10,7 +10,7 @@ export class GetAllAction {
       constructor(htmlActionButton, body) {
             this.body = body;
             this.htmlActionButton = htmlActionButton;
-            this.#spinnerComponent = new Spinner('info', 'Loading');
+            this.#spinnerComponent = new SpinnerComponent('info', 'Loading');
             this.#todoListModalComponent = new TodoListModalComponent();
             this.#initListener();
       }

@@ -2,9 +2,11 @@ import { TodoService } from '../../services/todo.service';
 import { TodoIdValidator } from '../../validators/todo-id.validator';
 import { AlertFactory } from '../alerts/alert.factory';
 import { BaseComponent } from '../base.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 export class DeleteModalComponent extends BaseComponent {
       #title;
+      #loadingSpinner;
       #body = document.querySelector('body');
       #modalDiv = document.createElement('div');
       #modalDialogDiv = document.createElement('div');
@@ -21,6 +23,7 @@ export class DeleteModalComponent extends BaseComponent {
       constructor(title) {
             super();
             this.#title = title;
+            this.#loadingSpinner = new SpinnerComponent('info', 'Deleting the todo ...');
       }
 
       get title() {
@@ -129,10 +132,12 @@ export class DeleteModalComponent extends BaseComponent {
       }
 
       #onModalAddEvent() {
+            this.#loadingSpinner.render();
             TodoService.delete(this.#modalInput.value)
                   .then((response) => {
-                        const { statusCode, success } = response;
+                        this.#loadingSpinner.remove();
                         this.remove.apply(this);
+                        const { statusCode, success } = response;
                         if (success) {
                               if (statusCode == 200) {
                                     AlertFactory.deletedAlert().render();
@@ -145,7 +150,8 @@ export class DeleteModalComponent extends BaseComponent {
                   })
                   .catch((error) => {
                         console.log(error);
-                        this.#onModalCloseEvent();
+                        this.#loadingSpinner.remove();
+                        this.remove.apply(this);
                         AlertFactory.networkErrorAlert().render();
                   });
       }

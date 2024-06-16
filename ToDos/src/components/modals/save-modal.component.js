@@ -3,10 +3,12 @@ import { TodoTitleValidator } from '../../validators/todo-title.validator';
 import { TodoDescriptionValidator } from '../../validators/todo-description.validator';
 import { AlertFactory } from '../alerts/alert.factory';
 import { BaseComponent } from '../base.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 export class SaveModalComponent extends BaseComponent {
       #title;
       #validInput;
+      #loadingSpinner;
       #body = document.querySelector('body');
       #modalDiv = document.createElement('div');
       #modalDialogDiv = document.createElement('div');
@@ -28,6 +30,7 @@ export class SaveModalComponent extends BaseComponent {
                   title: false,
                   description: false,
             };
+            this.#loadingSpinner = new SpinnerComponent('info', 'Saving the new todo ...');
       }
 
       get title() {
@@ -87,9 +90,11 @@ export class SaveModalComponent extends BaseComponent {
       #onConfirmCallback() {
             const title = this.#modalTitleInput.value;
             const description = this.#modalDescriptionInput.value;
+            this.#loadingSpinner.render();
 
             TodoService.save(JSON.stringify({ title, description }))
                   .then((response) => {
+                        this.#loadingSpinner.remove();
                         this.remove();
                         const { statusCode, success } = response;
                         if (success && statusCode === 201) {
@@ -99,6 +104,8 @@ export class SaveModalComponent extends BaseComponent {
                         }
                   })
                   .catch((error) => {
+                        this.#loadingSpinner.remove();
+                        this.remove();
                         console.log(error);
                   });
       }

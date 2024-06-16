@@ -4,10 +4,12 @@ import { TodoTitleValidator } from '../../validators/todo-title.validator';
 import { TodoDescriptionValidator } from '../../validators/todo-description.validator';
 import { AlertFactory } from '../alerts/alert.factory';
 import { BaseComponent } from '../base.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 export class UpdateModalComponent extends BaseComponent {
       #title;
       #validInput;
+      #loadingSpinner;
       #body = document.querySelector('body');
       #modalDiv = document.createElement('div');
       #modalDialogDiv = document.createElement('div');
@@ -31,6 +33,7 @@ export class UpdateModalComponent extends BaseComponent {
                   title: false,
                   description: false,
             };
+            this.#loadingSpinner = new SpinnerComponent('info', 'Updating the todo ...');
       }
 
       get title() {
@@ -92,8 +95,11 @@ export class UpdateModalComponent extends BaseComponent {
             const title = this.#modalTitleInput.value;
             const description = this.#modalDescriptionInput.value;
 
+            this.#loadingSpinner.render();
+
             TodoService.update(id, JSON.stringify({ title, description }))
                   .then((response) => {
+                        this.#loadingSpinner.remove();
                         this.remove();
                         const { statusCode, success } = response;
                         if (success && statusCode === 200) {
@@ -103,6 +109,8 @@ export class UpdateModalComponent extends BaseComponent {
                         }
                   })
                   .catch((error) => {
+                        this.#loadingSpinner.remove();
+                        this.remove();
                         console.log(error);
                   });
       }
