@@ -154,7 +154,7 @@ export class TodoController {
                   if (error.message == 'Todo already completed.') {
                         return response.status(TodoController.CONFLICT).json({
                               status: 'Conflict.',
-                              statusCode: TodoController.NOT_FOUND,
+                              statusCode: TodoController.CONFLICT,
                               message: 'Todo already completed.',
                               success: false,
                         });
