@@ -1,0 +1,27 @@
+{
+      "name": "typescript",
+      "version": "1.0.0",
+      "description": "An introduction to TypeScript",
+      "main": "index.js",
+      "scripts": {
+            "test": "echo \"Error: no test specified\" && exit 1"
+      },
+      "repository": {
+            "type": "git",
+            "url": "git+https://github.com/mrOranger/Javascript.git"
+      },
+      "keywords": [
+            "TypeScript",
+            "JavaScript",
+            "Frontend"
+      ],
+      "author": "mrOranger",
+      "license": "ISC",
+      "bugs": {
+            "url": "https://github.com/mrOranger/Javascript/issues"
+      },
+      "homepage": "https://github.com/mrOranger/Javascript#readme",
+      "devDependencies": {
+            "lite-server": "^2.6.1"
+      }
+}
