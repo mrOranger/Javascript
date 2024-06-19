@@ -59,3 +59,7 @@ Now that we have configurated our `tsconfig.json` file, have to have a look abou
 - even if there are errors in out TypeScript files, they will be still compiled in JavaScript, if we would like to avoid this behaviour, we have to set the `noEmitOnError` property.
 
 - `exclude` takes a the input file names that must be ignored during the compilation process, while `include` is used to indicate files that must be included in the compilation process, of course if no file is specified, it means that allw the files starting from the root directory will be included.
+
+- however, the most most important option is `strict` that enables the `use strict` mode in JavaScript, avoiding using `any` and other type's not safe operations.
+
+- there are three additional options, used to for `code quality`. `unusedLocals` avoid using local variables that are not used in the block, on the other hand, `unusedParameters` has the same effect but for parameters. `noImplicitReturns` option reports a warning when we do not always return any implicit value from a function.

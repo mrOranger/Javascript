@@ -1,0 +1,10 @@
+{
+      "apc.font.family": "Fira Code",
+      "editor.fontFamily": "Fira Code",
+      "editor.fontWeight": "100",
+      "editor.fontSize": 15,
+      "editor.fontLigatures": true,
+      "editor.fontVariations": true,
+      "editor.formatOnType": true,
+      "workbench.colorTheme": "Darcula"
+}
