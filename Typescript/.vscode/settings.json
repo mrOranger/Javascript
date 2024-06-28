@@ -1,10 +1,16 @@
 {
       "apc.font.family": "Fira Code",
+      "vscode_vibrancy.type": "auto",
+      "vscode_vibrancy.enableAutoTheme": true,
+      "vscode_vibrancy.theme": "GitHub Dark Default",
+      "vscode_vibrancy.opacity": -1,
+      "editor.cursorBlinking": "phase",
+      "editor.cursorSmoothCaretAnimation": "on",
       "editor.fontFamily": "Fira Code",
       "editor.fontWeight": "100",
       "editor.fontSize": 15,
       "editor.fontLigatures": true,
       "editor.fontVariations": true,
       "editor.formatOnType": true,
-      "workbench.colorTheme": "Darcula"
+      "workbench.colorTheme": "GitHub Dark"
 }
