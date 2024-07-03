@@ -33,3 +33,7 @@ input {
 button {
       width: 100%;
 }
+
+input[valid='false'] {
+      border: 1px solid red;
+}
