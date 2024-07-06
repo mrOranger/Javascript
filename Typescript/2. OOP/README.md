@@ -70,7 +70,10 @@ Respect to JavaScript we can also define **constant** properties, simply using t
 
 ```typescript
 class Person {
-      public constructor(private readonly _firstName: string, private readonly _lastName: string) {}
+      public constructor(
+            private readonly _firstName: string, 
+            private readonly _lastName: string
+      ) {}
 
       public get firstName() {
             return this._firstName;
