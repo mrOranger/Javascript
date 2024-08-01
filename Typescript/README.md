@@ -601,3 +601,27 @@ a simpler solution is to declare all the fields as optional using the `?` operat
 
 A similar behaviour that declare all the fields of a type as `readonly` is the `Readonly` type, that transforms all the fields contained in the generic parameter as `readonly` without allow the user to reassing the type's fields.
 
+## Meta Programming and Decorators
+In the JavaScript serie, we understand what **Meta Programming** is and how can we use concepts like `Symbol`, `Proxy` and `Reflect` to with the program's data. While these structures are encoded also in TypeScript, it offers also another feature known as **Decorator**. 
+
+Before start with **Decorator**, ensure that you have enabled the `experimentalDecorators` option in the [`tsconfig.json`](./tsconfig.json) file, otherwise you won't be able to use decorators.
+
+Now, a **Decorator** is an highe order function attached to a declaration of a class, a method and more, that is executed as soon as TypeScript detects the declaration of the entity. Let's create a **Decorator** attached to a class, that logs something as soon as the class declaration is detected, moreover the decorator must receive at least one argument that is represented by the object to which is attached, that is in this example a class which is a `Function` in TypeScript.
+
+```typescript
+function Log(obj: Function) {
+      console.log("Log ...");
+}
+
+@Log()
+class Person {
+      public firstName: string
+      public lastName: string;
+
+      public constructor(firstName: string, lastName: string) {
+            this.firstName = firstName;
+            this.lastName = lastName;
+      }
+}
+```
+now, if we execute the code, we will see `Log ...` without actually instantiated the class.
