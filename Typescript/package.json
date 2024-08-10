@@ -1,27 +1,36 @@
 {
-      "name": "typescript",
+      "name": "library-api",
       "version": "1.0.0",
-      "description": "An introduction to TypeScript",
+      "description": "REST API for a library",
       "main": "index.js",
       "scripts": {
-            "test": "echo \"Error: no test specified\" && exit 1"
+            "start:dev": "tsc --watch && nodemon dist/index.js",
+            "tsc:build": "tsc",
+            "tsc:watch": "tsc --watch",
+            "nodemon:start": "nodemon dist/index.js"
       },
       "repository": {
             "type": "git",
-            "url": "git+https://github.com/mrOranger/Javascript.git"
+            "url": "git+https://github.com/mrOranger/Javascript.git#chapter"
       },
       "keywords": [
             "TypeScript",
-            "JavaScript",
-            "Frontend"
+            "REST",
+            "API"
       ],
-      "author": "mrOranger",
+      "author": "Edoardo Oranger (mrOranger)",
       "license": "ISC",
       "bugs": {
             "url": "https://github.com/mrOranger/Javascript/issues"
       },
-      "homepage": "https://github.com/mrOranger/Javascript#readme",
+      "homepage": "https://github.com/mrOranger/Javascript/tree/chapter#readme",
+      "dependencies": {
+            "body-parser": "^1.20.2",
+            "express": "^4.19.2"
+      },
       "devDependencies": {
-            "lite-server": "^2.6.1"
+            "@types/express": "^4.17.21",
+            "@types/node": "^22.2.0",
+            "nodemon": "^3.1.4"
       }
 }
