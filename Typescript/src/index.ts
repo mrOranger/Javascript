@@ -1,5 +1,8 @@
 import express from 'express';
+import { libraryRouter } from './v1/routes';
 
 const application = express();
 
-application.listen(8080, () => console.log('listening on port 8080'));
+application.use('/api/v1', [libraryRouter])
+
+application.listen(80, () => console.log('listening on port 80'));
