@@ -1,0 +1,30 @@
+version: '3'
+name: library
+
+services:
+      database:
+            container_name: database
+            build:
+                  context: .
+                  dockerfile: mysql.dockerfile
+                  args:
+                        - MYSQL_DATABASE=${MYSQL_DATABASE}
+                        - MYSQL_USER=${MYSQL_USER}
+                        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+                        - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+            ports:
+                  - '${MYSQL_PORT}:3306'
+            volumes: 
+                  - db-data:/var/lib/mysql/
+      server:
+            container_name: server
+            build:
+                  context: .
+                  dockerfile: server.dockerfile
+            volumes:
+              - ./:/app
+            ports:
+              - '${SERVER_PORT}:8080'
+
+volumes:
+  db-data:

@@ -1,0 +1,10 @@
+node_modules
+src
+
+.gitignore
+.prettierrc
+docker-compose.yaml
+mysql.dockerfile
+README.md
+server.dockerfile
+tsconfig.json

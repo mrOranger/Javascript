@@ -4,7 +4,6 @@
       "description": "REST API for a library",
       "main": "index.js",
       "scripts": {
-            "start:dev": "tsc --watch && nodemon dist/index.js",
             "tsc:build": "tsc",
             "tsc:watch": "tsc --watch",
             "nodemon:start": "nodemon dist/index.js"
