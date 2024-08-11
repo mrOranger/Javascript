@@ -1,4 +1,6 @@
 import { Request, Response, NextFunction } from "express";
+import { MySqlDataSource } from "../database/mysql.datasource";
+import { Book } from "../models";
 
 export class LibraryController {
 
@@ -13,18 +15,6 @@ export class LibraryController {
         return LibraryController.instance;
     }
 
-    public index(request: Request, response: Response, next: NextFunction): void {
-        response.json({
-            data: [
-                {
-                    name: "Library 1",
-                    location: "Here",
-                },
-                {
-                    name: "Library 2",
-                    location: "Here",
-                }
-            ]
-        })
+    public index(request: Request, response: Response, next: NextFunction) {
     }
 }
