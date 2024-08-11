@@ -6,18 +6,17 @@ import Container from 'typedi';
 import bodyParser from 'body-parser';
 
 MySqlDataSource.initialize().then((dataSource) => {
+      const application = express();
 
-    const application = express();
+      application.use(bodyParser.urlencoded({ extended: false }));
+      application.use(bodyParser.json());
 
-    application.use(bodyParser.urlencoded({ extended: false }));
-    application.use(bodyParser.json());
+      useContainer(Container);
+      useExpressServer(application, {
+            routePrefix: '/api/v1',
+            defaultErrorHandler: false,
+            controllers: [`${__dirname}/**/controllers/*{.js,.ts}`],
+      });
 
-    useContainer(Container);
-    useExpressServer(application, {
-        routePrefix: '/api/v1',
-        defaultErrorHandler: false,
-        controllers: [`${__dirname}/**/controllers/*{.js,.ts}`]
-    });
-
-    application.listen(80, () => console.log('application listening on port 80'));
+      application.listen(80, () => console.log('application listening on port 80'));
 });
