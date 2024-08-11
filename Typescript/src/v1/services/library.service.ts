@@ -1,6 +1,8 @@
 import { Service } from 'typedi';
 import { MySqlDataSource } from '../database/mysql.datasource';
-import { Library } from '../models';
+import { Library, LibraryDTO } from '../models';
+import { v4 } from 'uuid';
+import { DeleteResult } from 'typeorm';
 
 @Service()
 export class LibraryService {
@@ -11,4 +13,21 @@ export class LibraryService {
       public find(id: string): Promise<Library | null> {
             return MySqlDataSource.getRepository(Library).findOneBy({ id });
       }
-}
+
+      public save(library: LibraryDTO): Promise<Library> {
+            library.id = v4();
+            return MySqlDataSource.getRepository(Library).save(library);
+      }
+
+      public update(id: string, library: LibraryDTO): Promise<Library | null> {
+            return MySqlDataSource.getRepository(Library).save({ 
+                  id: id,
+                  name: library.name,
+                  location: library.location
+            });
+      }
+
+      public delete (id: string): Promise<DeleteResult > {
+            return MySqlDataSource.getRepository(Library).delete({ id });
+      }
+ }
