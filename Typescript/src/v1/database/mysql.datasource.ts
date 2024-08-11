@@ -1,4 +1,5 @@
 import { DataSource } from "typeorm";
+import { Book } from "../models";
 
 export const MySqlDataSource = new DataSource({
     type: "mysql",
@@ -9,7 +10,7 @@ export const MySqlDataSource = new DataSource({
     database: "library",
     synchronize: true,
     logging: true,
-    entities: [],
+    entities: [Book],
     subscribers: [],
     migrations: [],
 });
