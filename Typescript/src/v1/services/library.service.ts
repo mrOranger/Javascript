@@ -7,11 +7,23 @@ import { DeleteResult } from 'typeorm';
 @Service()
 export class LibraryService {
       public index(): Promise<Array<Library>> {
-            return MySqlDataSource.getRepository(Library).find();
+            return MySqlDataSource.getRepository(Library).find({
+                  relations: {
+                        copies: true,
+                  }
+            });
       }
 
       public find(id: string): Promise<Library | null> {
-            return MySqlDataSource.getRepository(Library).findOneBy({ id });
+            return MySqlDataSource.getRepository(Library)
+                  .findOne({
+                        relations: {
+                              copies: true
+                        },
+                        where: {
+                              id: id
+                        }
+                  });
       }
 
       public save(library: LibraryDTO): Promise<Library> {
