@@ -19,7 +19,7 @@ export class LibraryService {
             return MySqlDataSource.getRepository(Library).save(library);
       }
 
-      public update(id: string, library: LibraryDTO): Promise<Library | null> {
+      public update(id: string, library: LibraryDTO): Promise<Library> {
             return MySqlDataSource.getRepository(Library).save({ 
                   id: id,
                   name: library.name,
