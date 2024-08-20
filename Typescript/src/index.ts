@@ -6,6 +6,7 @@ import Container from 'typedi';
 import bodyParser from 'body-parser';
 
 MySqlDataSource.initialize().then((dataSource) => {
+
       const application = express();
 
       application.use(bodyParser.urlencoded({ extended: false }));
@@ -18,5 +19,7 @@ MySqlDataSource.initialize().then((dataSource) => {
             controllers: [`${__dirname}/**/controllers/*{.js,.ts}`],
       });
 
-      application.listen(80, () => console.log('application listening on port 80'));
+      application.listen(process.env.SERVER_PORT, () =>
+            console.log(`application listening on port ${process.env.SERVER_PORT}`)
+      );
 });

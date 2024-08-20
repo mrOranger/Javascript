@@ -8,6 +8,7 @@ services:
                   context: .
                   dockerfile: mysql.dockerfile
                   args:
+                        - ROLE=production
                         - MYSQL_DATABASE=${MYSQL_DATABASE}
                         - MYSQL_USER=${MYSQL_USER}
                         - MYSQL_PASSWORD=${MYSQL_PASSWORD}
@@ -16,15 +17,27 @@ services:
                   - '${MYSQL_PORT}:3306'
             volumes:
                   - db-data:/var/lib/mysql/
+            networks:
+                  - app-network
       server:
             container_name: server
+            env_file:
+                  - .env.production
             build:
                   context: .
                   dockerfile: server.dockerfile
+            depends_on:
+                  - database
             volumes:
                   - ./:/app
             ports:
                   - '${SERVER_PORT}:8080'
+            networks:
+                  - app-network
 
 volumes:
-      db-data:
+      db-data: ~
+
+networks:
+      app-network:
+            driver: bridge
