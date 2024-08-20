@@ -1,6 +1,9 @@
+import { Copy } from "../copy.model";
+
 export class BookDTO {
       public constructor(
-            public readonly title: string,
-            public readonly isbn?: string,
+            public title: string,
+            public isbn?: string,
+            public copies?: Array<Copy>,
       ) {}
 }

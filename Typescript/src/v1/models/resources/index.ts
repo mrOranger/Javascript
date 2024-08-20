@@ -1,4 +1,2 @@
-export * from './library.collection';
-export * from './library.resource';
-export * from './book.collection';
-export * from './book.resource';
+export * from './book';
+export * from './library';

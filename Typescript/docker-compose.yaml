@@ -14,7 +14,7 @@ services:
                         - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
             ports:
                   - '${MYSQL_PORT}:3306'
-            volumes: 
+            volumes:
                   - db-data:/var/lib/mysql/
       server:
             container_name: server
@@ -22,9 +22,9 @@ services:
                   context: .
                   dockerfile: server.dockerfile
             volumes:
-              - ./:/app
+                  - ./:/app
             ports:
-              - '${SERVER_PORT}:8080'
+                  - '${SERVER_PORT}:8080'
 
 volumes:
-  db-data:
+      db-data:
