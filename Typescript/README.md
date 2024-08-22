@@ -1,7 +1,7 @@
 # Typescript
 
 <p align="center">
-<img src="./assets/Typescript-Javascript.png" >
+<img src="./assets/Typescript-Javascript.png" style="width: 40%">
 </p>
 
 Now that we have a deeper understand of JavaScript, we are going to have a look on TypeScript. TypeScript is a **superset** of JavaScript, that is, it is not a completely independent programming language, however, is a <u>programming language built upon another language, in this case JavaScript</u>. Moreover, since TypeScript is not a programming language, it cannot be executed by the browser, but it must be **transpilled** in JavaScript's code, meaning that the <u>TypeScript code will be converted in its JavaScript's counterpart</u>, preserving its own login but using only JavaScript's feature.
@@ -836,4 +836,3 @@ main();
 ```
 
 if remove the previous settings from the [`tsconfig.json`](./tsconfig.json), you will see that a JavaScript file has been created for each of its typescript part, moreover, if you would like to execute the code you must ensure that the option `"type": "module"` is setted in the [`package.json`](./package.json) or in the `script` tag of the HTML file. Last but not least, you probably notice that we imported the .js conterpart in each import statement, this because the import statement with this configuration won't be converted looking for the .ts file, however, it will look only for the file that are actually compiled, that are the JavaScript files.
-
