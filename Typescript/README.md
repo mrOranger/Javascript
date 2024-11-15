@@ -6,7 +6,7 @@
 
 Now that we have a deeper understand of JavaScript, we are going to have a look on TypeScript. TypeScript is a **superset** of JavaScript, that is, it is not a completely independent programming language, however, is a <u>programming language built upon another language, in this case JavaScript</u>. Moreover, since TypeScript is not a programming language, it cannot be executed by the browser, but it must be **transpilled** in JavaScript's code, meaning that the <u>TypeScript code will be converted in its JavaScript's counterpart</u>, preserving its own login but using only JavaScript's feature.
 
-Up to this point, we have a programming language, that is not a programming language, and that cannot be executed by any JavaScript's engine like Chrome's V8, so why should we use TypeScript insead of normal JavaScript? Well, answering this question needs an example, let's consider the following code:
+Up to this point, we have a programming language, that is not a programming language, and that cannot be executed by any JavaScript's engine like Chrome's V8, so why should we use TypeScript instead of normal JavaScript? Well, answering this question needs an example, let's consider the following code:
 
 ```javascript
 function printPersonName(firstName, lastName) {
@@ -14,15 +14,15 @@ function printPersonName(firstName, lastName) {
 }
 ```
 
-Is there any way to tell JavaScript that the two parameters of the function must be strings necessarly? Umfortunately no ... but we can achieve that with TypeScript. Of course we will not study TypeScript just because it is a JavaScript's version with types, in fact, TypeScript adds many programming features that JavaScript does not have, for instance:
+Is there any way to tell JavaScript that the two parameters of the function must be strings necessarily? Unfortunately no ... but we can achieve that with TypeScript. Of course we will not study TypeScript just because it is a JavaScript's version with types, in fact, TypeScript adds many programming features that JavaScript does not have, for instance:
 
 - Object-oriented structures like **Generics** and **Interfaces** are not supported by JavaScript, but they are in TypeScript.
 
 - We saw **Meta-Programming Features** in JavaScript like **Proxy** or **Symbols**, while TypeScript adds also **Decorators**.
 
-- Moreover, TypeScript offers an enriched configuration, and can tranpile our code in a JavaScript version supported also by older browsers, without intalling additional tools like **Babel**.
+- Moreover, TypeScript offers an enriched configuration, and can tranpile our code in a JavaScript version supported also by older browsers, without installing additional tools like **Babel**.
 
-In this section of the repository, we will not have a look on single feature using examples like in JavaScript, on the other hand we will have a look on the most important features of TypeScript and then we will see all the theoretical concepts in the final project of the serie.
+In this section of the repository, we will not have a look on single feature using examples like in JavaScript, on the other hand we will have a look on the most important features of TypeScript and then we will see all the theoretical concepts in the final project.
 
 ## Installation and Setup
 
@@ -38,23 +38,23 @@ to install the latest version of TypeScript globally on your machine. Once TypeS
 tsc file.ts
 ```
 
-to transpile the file `file.ts` in its JavaScript counterpart. Beaside TypeScript, we will use another development tools `lite-server` that allows us to serve JavaScript files attached to an HTML file, listening for updates and applying them to our code.
+to transpile the file `file.ts` in its JavaScript counterpart. Beside TypeScript, we will use another development tools `lite-server` that allows us to serve JavaScript files attached to an HTML file, listening for updates and applying them to our code.
 
-Up to this point, it is quite difficult to use TypeScript since we have to compile each file individually and manually using the previous command. However, TypeScript can be configurated using a `tsconfig.json` file, where in we can specify additional commands and behaviours of the TypeScript compiler, that makes easier our work. Moreover, if you do not want to create that file manyally, you can use the commando `tsc --init`, that generates the file automatically.
+Up to this point, it is quite difficult to use TypeScript since we have to compile each file individually and manually using the previous command. However, TypeScript can be configured using a `tsconfig.json` file, where in we can specify additional commands and behaviors of the TypeScript compiler, that makes easier our work. Moreover, if you do not want to create that file manually, you can use the commando `tsc --init`, that generates the file automatically.
 
-### TypeScript configuraton file (tsconfig.json)
+### TypeScript configuration file (tsconfig.json)
 
-Now that we have configurated our `tsconfig.json` file, have to have a look about the configuration keys, defining the TypeScript's compiler behaviour:
+Now that we have configured our `tsconfig.json` file, have to have a look about the configuration keys, defining the TypeScript's compiler behavior:
 
 - while we are compiling a TypeScript file in its JavaScript counterpart, we have to decide which version of ECMAScript we would like to use. That is, the `target` property indicates the ECAScript version used to generate the JavaScript file, in fact, if we would like to generate JavaScript files that have to runnable in older browser using the `es3` value is a good choice, in fact, it is the default values used to TypeScript if we do not specify anything.
 
-- after compile a TypeScript file, we can indicate which library will be used by our files. Therefore, `lib` takes a collection of dependences that will be injected in our final file.
+- after compile a TypeScript file, we can indicate which library will be used by our files. Therefore, `lib` takes a collection of dependencies that will be injected in our final file.
 
-- if we would like to debug our file from the browser, we have to use only JavaScript files, however, if the output file will grow and begin unreadable, the debugging process will be quite impossibile. Thus, we need `.map` files that map our JavaScript file in the original TypeScript, and this kind of files are generated using the `sourceMap` property.
+- if we would like to debug our file from the browser, we have to use only JavaScript files, however, if the output file will grow and begin unreadable, the debugging process will be quite impossible. Thus, we need `.map` files that map our JavaScript file in the original TypeScript, and this kind of files are generated using the `sourceMap` property.
 
 - `rootDir` and `outDir` are used to indicate the root directory and the directory where the output file will be places.
 
-- even if there are errors in out TypeScript files, they will be still compiled in JavaScript, if we would like to avoid this behaviour, we have to set the `noEmitOnError` property.
+- even if there are errors in out TypeScript files, they will be still compiled in JavaScript, if we would like to avoid this behavior, we have to set the `noEmitOnError` property.
 
 - `exclude` takes a the input file names that must be ignored during the compilation process, while `include` is used to indicate files that must be included, of course if no file is specified, it means that will includes all the files start from the root directory.
 
@@ -68,7 +68,7 @@ Since TypeScript is a JavaScript's superset, we will not have a look on types li
 
 ### Tuples
 
-The first built in type in TypeScript is the **tuple**, if we would write a definiton of tuple, we could say that it is a <u>fixed set of elements with a fixed type for each index</u>. Now, there is not a special notation in TypeScript to create a tuple, but we have to use the same notation, with an update, used for `Array`. Let's consider this example, if we would like to create a tuple of three elements, the first is a `number`, and the others are `string` and `number`, we should write something like this:
+The first built in type in TypeScript is the **tuple**, if we would write a definition of tuple, we could say that it is a <u>fixed set of elements with a fixed type for each index</u>. Now, there is not a special notation in TypeScript to create a tuple, but we have to use the same notation, with an update, used for `Array`. Let's consider this example, if we would like to create a tuple of three elements, the first is a `number`, and the others are `string` and `number`, we should write something like this:
 
 ```typescript
 const tuple = [1, 'Mario Rossi', 24];
@@ -151,7 +151,7 @@ it is not possible that the variable `currentStatus` can assume another value th
 
 ### Any
 
-Undoubtedly, `any` is the most permissibe type, and it is use as a workaround if we would not like to specity any type to a variable or a parameter. Of course, even though it is a basic TypeScript type, we should avoid to use it in our programs, because, if we take a look at this example:
+Undoubtedly, `any` is the most permissible type, and it is use as a workaround if we would not like to specify any type to a variable or a parameter. Of course, even though it is a basic TypeScript type, we should avoid to use it in our programs, because, if we take a look at this example:
 
 ```typescript
 function sayHello(firstName: any, lastName: any) {
@@ -196,7 +196,7 @@ function checkPassword(user: { username: string; password: string }) {
 }
 ```
 
-Up to this point, if we are passing a parameter that is a complex object like in this example, we would like to use a simplier way to define the parameter's type. Fortunately, we can define our custom type in TypeScript using the `type` keyword, and using or exporting this definition in our project.
+Up to this point, if we are passing a parameter that is a complex object like in this example, we would like to use a simpler way to define the parameter's type. Fortunately, we can define our custom type in TypeScript using the `type` keyword, and using or exporting this definition in our project.
 
 That is, our `user` parameter's type, will be something like this:
 
@@ -217,7 +217,7 @@ function checkPassword(user: User) {
 }
 ```
 
-which is, of course, a shorter and simplier way to implement our function.
+which is, of course, a shorter and simpler way to implement our function.
 
 ### Functions & Functions Type
 
@@ -237,7 +237,7 @@ const addF: Function = add;
 console.log(addF(2, 2)); // 4 ...
 ```
 
-it seems pretty clear how can we use the `Function` type. However, previously I said that `Function` represents any type of function, that is both `add` and `square` are `Function`, thus, how can we indicate to a variable that its type must match exaclty the type of the function `add` respect to the function `square`?
+it seems pretty clear how can we use the `Function` type. However, previously I said that `Function` represents any type of function, that is both `add` and `square` are `Function`, thus, how can we indicate to a variable that its type must match exactly the type of the function `add` respect to the function `square`?
 
 The answer to the previous question is that we have to indicate the exact signature of the function, when we are defining the type of a variable, that is something like this:
 
@@ -264,7 +264,7 @@ we specify the type of the `callback` function, and then we can pass to the func
 
 ### Unknown
 
-There is another version of the `any` type, that is much less permessive than the first one, that is `unknown`. By using unknown we are actully tell to TypeScript that we do not know which one will be the type of the variable, and this is quite common in our programs if you think for a while about the user's input.
+There is another version of the `any` type, that is much less permissive than the first one, that is `unknown`. By using unknown we are actually tell to TypeScript that we do not know which one will be the type of the variable, and this is quite common in our programs if you think for a while about the user's input.
 
 Now, as we said before, the main difference between `any` and `unknown` is that the latter is less permissive, it can be initialized with any value, but it cannot be assigned to any other variable, as we can see below:
 
@@ -276,7 +276,7 @@ variable = 1;
 let anotherVariable: string = variable; // Compile time errr ...
 ```
 
-from another persective, `unknown` is a safety way to declare a variable as generic, without kwnowing which one will be the type for it.
+from another perfective, `unknown` is a safety way to declare a variable as generic, without knowing which one will be the type for it.
 
 ### Never
 
@@ -288,15 +288,15 @@ function aFunction() {
 }
 ```
 
-what will be the returned type of that function? If you write this function in a IDE and hover using the mouse, you probably see `void`. However, the function actually returns something, thus `void` does not make sense, insted, the function returns `never`, meaning that neither `void` will be returned.
+what will be the returned type of that function? If you write this function in a IDE and hover using the mouse, you probably see `void`. However, the function actually returns something, thus `void` does not make sense, instead, the function returns `never`, meaning that neither `void` will be returned.
 
 In fact, if you try to assign the resulting value to a variable, and you print the variable itself, you will see that `undefined` won't be printed, but an error will be thrown in the console.
 
 ## Object Oriented Programming
 
-Even thought in JavaScript OOP is a well known concept, in TypeScript it is improved in such a way as introducing concepts like: propertie's and method's visibility, inheritance and generic programming. In this section, we will not have a look on the basic's OOP concepts, moreover, we will see how these are implemented in TypeScript and how they differ respect to JavaScript.
+Even thought in JavaScript OOP is a well known concept, in TypeScript it is improved in such a way as introducing concepts like: properties and method's visibility, inheritance and generic programming. In this section, we will not have a look on the basic's OOP concepts, moreover, we will see how these are implemented in TypeScript and how they differ respect to JavaScript.
 
-### Classe's basis concepts and visibility operators
+### Class's basis concepts and visibility operators
 
 A **Class** is nothing more than a blueprint for an **Object**, moreover, in TypeScript we can specify the types of methods and properties, and also use **visibility operators** in a way that control the access to them. Let's take a look at the following example in JavaScript, where we would like to implement a `Person` class:
 
@@ -342,7 +342,7 @@ class Person {
 }
 ```
 
-it is much cleaver right? We can use `private` and `public` keywords to indicate who can access to the classe's properties (if we ommit the visibility modifier, `public` is the default one).
+it is much cleaver right? We can use `private` and `public` keywords to indicate who can access to the class's properties (if we omit the visibility modifier, `public` is the default one).
 
 Moreover, there is a shortcut method introduced in latest TypeScript version, and which ables us to define the properties inside the constructor's parameters, in such a way:
 
@@ -360,7 +360,7 @@ class Person {
 }
 ```
 
-Respect to JavaScript we can also define **constant** properties, simply using the `readonly` modifier before the propertie's definition, like in this way:
+Respect to JavaScript we can also define **constant** properties, simply using the `readonly` modifier before the property's definition, like in this way:
 
 ```typescript
 class Person {
@@ -378,7 +378,7 @@ class Person {
 
 ### Inheritance
 
-Like in JavaScript, also in TypeScript we can inherit classes' beheviours using the `extends` keyword, however, inherit's a classes' behaviour means that we have to call the parent's class constructor using the `super` method.
+Like in JavaScript, also in TypeScript we can inherit classes' behaviors using the `extends` keyword, however, inherit's a classes' behavior means that we have to call the parent's class constructor using the `super` method.
 
 Let's take a look at this example:
 
@@ -449,7 +449,7 @@ interface Person {
 }
 ```
 
-Up to this point, what is the difference between `interface` and `type` as we saw earlier? Well, the key difference is that interfaces can also be used as **contracts** for classes. According to the last statement, we can use the keywork `implements` to indicate that a class must have the methods and the properties that are defined in the interface that it implements.
+Up to this point, what is the difference between `interface` and `type` as we saw earlier? Well, the key difference is that interfaces can also be used as **contracts** for classes. According to the last statement, we can use the keyword `implements` to indicate that a class must have the methods and the properties that are defined in the interface that it implements.
 
 Let's consider the following example: we would like to create an interface named `Printable` that contains a method named `print` that prints the classes' description that implements the interface, moreover, we would like to declare the class `Person` that implements that interface:
 
@@ -467,7 +467,7 @@ class Person implements Printable {
 }
 ```
 
-As we can see, we can use the interface as a contract for a class that **must** expose the interfaceproperties, this behaviour would impossibile using the normal `type`. Moreover, the interface `Printable` can extends another interface by inherit the behaviour of the first one, like this:
+As we can see, we can use the interface as a contract for a class that **must** expose the interface properties, this behavior would impossible using the normal `type`. Moreover, the interface `Printable` can extends another interface by inherit the behavior of the first one, like this:
 
 ```typescript
 interface Person {
@@ -480,9 +480,9 @@ interface Employee extends Person {
 }
 ```
 
-of course, a similar behaviour can be achived also with `type` but we have to use the **type intersection**.
+of course, a similar behavior can be achieved also with `type` but we have to use the **type intersection**.
 
-Like in classes, also interfaces can declare their fields using the `readonly` modifier. Interface's properties declared using that modifer cannot be updated after assignment.
+Like in classes, also interfaces can declare their fields using the `readonly` modifier. Interface's properties declared using that modifier cannot be updated after assignment.
 
 ## Generics
 
@@ -500,9 +500,9 @@ function concat(firstArray: string[], secondArray: string[]): string[] {
 const result = concat(['a', 'b'], ['d', 'f']); //[a, b, d, f]
 ```
 
-this function works fine, however, it can concat only array of strings, it would be better if it can concatenate also strings of numbers or something else, how can we solve this problem? Of course, we can implement different versions of the same function, working with different types, on the other hand it would be a cumbersome solution ... or we can use **generics**.
+this function works fine, however, it can concatenate only array of strings, it would be better if it can concatenate also strings of numbers or something else, how can we solve this problem? Of course, we can implement different versions of the same function, working with different types, on the other hand it would be a cumbersome solution ... or we can use **generics**.
 
-If you have worked with another object oriented programming language, you probably know that there is a native mechanism to create methods or functions that acceps any type of input. In TypeScript, we can create a generic function symply using the angle brackets like this:
+If you have worked with another object oriented programming language, you probably know that there is a native mechanism to create methods or functions that accept any type of input. In TypeScript, we can create a generic function simply using the angle brackets like this:
 
 ```typescript
 function concat<T>(firstArray: T[], secondArray: T[]): T[] {
@@ -514,7 +514,7 @@ function concat<T>(firstArray: T[], secondArray: T[]): T[] {
 }
 ```
 
-now we can resuse the same function for different inputs. Of course, in this example we are indicating to TypeScript that the function accepts only one **generic parameter**, on the other hand, we can accept an arbitrary number of parameters specifying them inside the angle brackets.
+now we can reuse the same function for different inputs. Of course, in this example we are indicating to TypeScript that the function accepts only one **generic parameter**, on the other hand, we can accept an arbitrary number of parameters specifying them inside the angle brackets.
 
 ### Constraints
 
@@ -553,7 +553,7 @@ function printInfo<T extends Person, U, K>(person: T, firstField: U, secondField
 }
 ```
 
-however, this would not work, because TypeScript is not sure about the presence or not of the two parameters in the set of keys of the first one. Once more, another keyword, this time `keyof`, will help us. `keyof` indicates to TypeScript that the following parameter is in the set of the keys of another parameter, that is we have to use `keyof` in conjuction with the `extends`, like this:
+however, this would not work, because TypeScript is not sure about the presence or not of the two parameters in the set of keys of the first one. Once more, another keyword, this time `keyof`, will help us. `keyof` indicates to TypeScript that the following parameter is in the set of the keys of another parameter, that is we have to use `keyof` in conjunction with the `extends`, like this:
 
 ```typescript
 function printInfo<T extends Person, U extends keyof Person, K extends keyof Person>(
@@ -569,13 +569,17 @@ now TypeScript will compile correctly, because it will understand that `U` and `
 
 ### Utility Types
 
-TypeScript offers some **utility types** that helps us in common programming's task, because the list is quite long, we will not have a deeper look on it, while we will see just two of them that can be exaplained easily. The first one is `Partial`, let's consider a classic interface like this one:
+TypeScript offers some **utility types** that helps us in common programming's task, moreover, you will probably need these working with generic functions while refactoring your code. While the list is quite longer, we will divide each of these built-in types based on the target they are working, that is: working in types and interfaces; on union types; and finally on functions.
+
+### Utility Types working on types and interfaces
+
+The first one is `Partial`, let's consider a classic interface like this one:
 
 ```typescript
-interface Person {
+type Person = {
       firstName: string;
       lastName: string;
-}
+};
 ```
 
 if we want to create a variable from this interface, we have to specify all the fields prior, it means that something like this will not be allowed:
@@ -586,13 +590,78 @@ person.firstName = 'Mario';
 person.lastName = 'Rossi';
 ```
 
-a simpler solution is to declare all the fields as optional using the `?` operator, however, we can declare the variable `person` as a `Partial<Person>` indicating to TypeScript that the variable can contain parts of the `Person` interface without containing all the fields necessarly.
+a simpler solution is to declare all the fields as optional using the `?` operator, however, we can declare the variable `person` as a `Partial<Person>` indicating to TypeScript that the variable can contain parts of the `Person` interface without containing all the fields necessary:
 
-A similar behaviour that declare all the fields of a type as `readonly` is the `Readonly` type, that transforms all the fields contained in the generic parameter as `readonly` without allow the user to reassing the type's fields.
+```typescript
+type partialPerson = Partial<Person>;
+```
+
+The counterpart of `Partial` is `Required`, while the former makes all the fields of an object optional, the latter makes all the optional fields mandatory, as shown below:
+
+```typescript
+type requiredPerson = Required<Person>;
+```
+
+A similar behavior that declare all the fields of a type as `readonly` is the `Readonly` type, that transforms all the fields contained in the generic parameter as `readonly` without allow the user to reassign the type's fields:
+
+```typescript
+type readonlyPerson = Readonly<Person>;
+```
+
+While the previous utility types changes object's properties, the following allows us to create new types merging two different types. Moreover, these utility types are typically useful working on union types.
+Let's start with the following scenario, we would like to create a new type having a set of well defined keys' names, and whose values can be of a specified type. However, we would like to create a new type dynamically,
+we would like to use a single constructor without define each new type all the time. `Record<K, V>` is the built in utility types that creates a type whose keys must be of type `K` and values of type `V`,
+using this type, we can create the previous type `Person` in the following way:
+
+```typescript
+type Fields = 'firstName' | 'lastName';
+type Values = string;
+type Person = Record<Fields, Values>;
+
+const aPerson: Person = {
+    firstName: 'John',
+    lastName: 'Doe',
+};
+```
+
+the interesting part of this utility type is that you can use it to combine types having a structure. For instance, we can create a new type having values' types of `Person` keys using the `keyof` operator in the following way:
+
+```typescript
+type StrangePerson = Record<Values, keyof Person>;
+const aStrangePerson = {
+      ['John']: 'firstName',
+      ['Doe']: 'lastName',
+};
+```
+
+The next two utility types `Pick<T, K>` and `Omit<T, K>` takes and removes from the input type `T`, its keys contained in the set of keys defined by `K`:
+
+```typescript
+type Vehicle = {
+    name: string;
+    model: string;
+    hp: number;
+}
+
+type VehicleName = Omit<Vehicle, 'model' | 'hp'>; // VehichleName = { name: string };
+type NamelessVehicle = Pick<Vehicle, 'model' | 'hp'>; // VehicleName = { model: string, hp: number}
+```
+
+Up to this point, each Utility Type that we saw, works on plain types, and then, the next two Utility Types that we are going to analyze works only on union types. `Exclude<T, K>` and `Extract<T, K>` removes and get a set of values contained in the first union type `T`, based on a certain condition expressed with the union of values defined in the second type parameter:
+
+```typescript
+type Names = 'Mario' | 'Maria' | 'Federico';
+type OnlyMale = Exclude<Names, 'Maria'>
+```
+
+```typescript
+type Names = 'Mario' | 'Maria' | 'Federico' | 'Federica';
+type OnlyFemale = Extract<Names, 'Maria' | 'Federica'>;
+```
 
 ## Meta Programming and Decorators
 
-In the JavaScript serie, we understand what **Meta Programming** is and how can we use concepts like `Symbol`, `Proxy` and `Reflect` to with the program's data. While these structures are encoded also in TypeScript, it offers also another feature known as **Decorator**.
+In the JavaScript series, we understand what **Meta Programming** is and how can we use concepts like `Symbol`, `Proxy` and `Reflect` to with the program's data. While these structures are encoded also in TypeScript, it offers also another feature known as **Decorator**.
 
 Before start with Decorator, ensure that you have enabled the `experimentalDecorators` option in the [`tsconfig.json`](./tsconfig.json) file, otherwise you won't be able to use decorators.
 
@@ -615,7 +684,7 @@ class Person {
 }
 ```
 
-now, if we execute the code, we will see `Log ...` without actually instantiated the class. Of course, it would be better if we can pass some parameters to the decorator, and we can achieve that by using a **factory function**, that is a function returing another function by using the parameters. Let's rewrite the function using a factory:
+now, if we execute the code, we will see `Log ...` without actually instantiated the class. Of course, it would be better if we can pass some parameters to the decorator, and we can achieve that by using a **factory function**, that is a function returning another function by using the parameters. Let's rewrite the function using a factory:
 
 ```typescript
 function Log(message: string) {
@@ -636,9 +705,9 @@ class Person {
 }
 ```
 
-Up to this point we used decorator only for class definitior, however, we can attach a decorator also to a classe's property like `firstName` chainging the decorator's parameters. Indeed, a decorator used for a property receives two parameters, the former is the constructor the constructor function if the property is static, or the classe's prototype if the property is an instance one, while the latter parameter is the name of the property itself.
+Up to this point we used decorator only for class definition, however, we can attach a decorator also to a class's property like `firstName` chaining the decorator's parameters. Indeed, a decorator used for a property receives two parameters, the former is the constructor the constructor function if the property is static, or the class's prototype if the property is an instance one, while the latter parameter is the name of the property itself.
 
-In this example we are going to create a new decorator attaching it to the property `firstName` and we will see how the output is chainging, once more we will use a factory function because we want to pass some parameters to the decorator:
+In this example we are going to create a new decorator attaching it to the property `firstName` and we will see how the output is changing, once more we will use a factory function because we want to pass some parameters to the decorator:
 
 ```typescript
 function Loggable(message: string) {
@@ -665,7 +734,7 @@ class Person {
 
 if we execute the code, we will see that `Log for ... firstName` will be printed, with the `Prototype` of the class.
 
-As we mentioned before, decorators can be attached also to other entities beasides classes. In fact, we can attach decorator to **accessors**, **methods** and also **parameters**, however the structure of the decorator is quite the same for each of them, the first parameter is the `target` which is the Prototype or the constructor function; the second parameter is the name of the target, and the only parameter that changes is the third one, indeed, for decorators attached to accessor or methods is of type `PropertyDescriptor`, while for decorators attached to parameters is the index of the parameter. Let's define three decorators attached to our `Person` class:
+As we mentioned before, decorators can be attached also to other entities besides classes. In fact, we can attach decorator to **accessors**, **methods** and also **parameters**, however the structure of the decorator is quite the same for each of them, the first parameter is the `target` which is the Prototype or the constructor function; the second parameter is the name of the target, and the only parameter that changes is the third one, indeed, for decorators attached to accessor or methods is of type `PropertyDescriptor`, while for decorators attached to parameters is the index of the parameter. Let's define three decorators attached to our `Person` class:
 
 ```typescript
 function Accessor(target: any, name: string | Symbol, descriptor: PropertyDescriptor) {
@@ -703,7 +772,7 @@ class Person {
 
 ## Modules and Namespace
 
-In TypeScript just like in JavaScript, each file represents a module, and we can use the ES6 syntax with `import` and `export` keywords to import and export entitie's definitions from a module. Moreover, TypeScript adds the concept of **namespace**, thanks to we can regropu definitions of variables, classes and other stuffs in the same module, and then exporting a module from a file, instead single elements.
+In TypeScript just like in JavaScript, each file represents a module, and we can use the ES6 syntax with `import` and `export` keywords to import and export entities definitions from a module. Moreover, TypeScript adds the concept of **namespace**, thanks to we can regroup definitions of variables, classes and other stuffs in the same module, and then exporting a module from a file, instead single elements.
 
 A namespace is TypeScript feature to regroup definitions and share between them between different files, creating a new namespace requires to use the `namespace` keyword, and enclosing our definitions there. Let's consider the following scenario, we would like to create a new namespace named **Company** and declare inside it some interfaces and validators for our application. Now, let's define the models and the validators in two different files `models.ts` for the interfaces and `validators.ts` for the validators, however, both of the files must declare the functions and the interfaces in the same namespace:
 
@@ -735,7 +804,7 @@ namespace Company {
 }
 ```
 
-delcare a new namespace is quite simple, we have to use the `namespace` keyword with `export` to indicate if we would like to export the definition outsite the namespace, however, if we would like to use a namespace from another file, we have to use the following comand `/// <reference path="" />` that is not a comment but a TypeScript built-in feature to import of a namespace from another file. Now, if we would like to use the same namespace with its declarations in another file, we have to import the two previous references like this:
+declare a new namespace is quite simple, we have to use the `namespace` keyword with `export` to indicate if we would like to export the definition outside the namespace, however, if we would like to use a namespace from another file, we have to use the following command `/// <reference path="" />` that is not a comment but a TypeScript built-in feature to import of a namespace from another file. Now, if we would like to use the same namespace with its declarations in another file, we have to import the two previous references like this:
 
 ```typescript
 /// <reference path="models.ts" />
@@ -835,4 +904,4 @@ function main() {
 main();
 ```
 
-if remove the previous settings from the [`tsconfig.json`](./tsconfig.json), you will see that a JavaScript file has been created for each of its typescript part, moreover, if you would like to execute the code you must ensure that the option `"type": "module"` is setted in the [`package.json`](./package.json) or in the `script` tag of the HTML file. Last but not least, you probably notice that we imported the .js conterpart in each import statement, this because the import statement with this configuration won't be converted looking for the .ts file, however, it will look only for the file that are actually compiled, that are the JavaScript files.
+if remove the previous settings from the [`tsconfig.json`](./tsconfig.json), you will see that a JavaScript file has been created for each of its typescript part, moreover, if you would like to execute the code you must ensure that the option `"type": "module"` is set in the [`package.json`](./package.json) or in the `script` tag of the HTML file. Last but not least, you probably notice that we imported the .js counterpart in each import statement, this because the import statement with this configuration won't be converted looking for the .ts file, however, it will look only for the file that are actually compiled, that are the JavaScript files.

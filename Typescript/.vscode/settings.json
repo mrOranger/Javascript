@@ -1,13 +1,9 @@
 {
-      "apc.font.family": "Fira Code",
-      "editor.cursorBlinking": "phase",
-      "editor.cursorSmoothCaretAnimation": "on",
-      "editor.defaultFormatter": "esbenp.prettier-vscode",
-      "editor.fontFamily": "Fira Code",
-      "editor.fontSize": 14,
-      "editor.fontLigatures": true,
-      "editor.fontVariations": true,
-      "workbench.colorTheme": "Vim Deep Dark",
-      "workbench.tree.indent": 16,
-      "workbench.tree.renderIndentGuides": "none"
+      "editor.fontSize": 13,
+      "editor.lineHeight": 1.5,
+      "editor.letterSpacing": 0,
+      "editor.tabSize": 2,
+      "editor.wordWrap": "on",
+      "editor.formatOnSave": true,
+      "editor.fontFamily": "MonoLisa Nerd Font Mono"
 }
